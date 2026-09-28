@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verified Organizations — FoodConnect</title>
+  <meta name="description" content="Find verified NGOs and community organizations working with FoodConnect in Madurai. Register your organization for verification.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <a href="index.html" class="nav-logo">Food<span>Connect</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donate.html">Donate</a>
+    <a href="request.html">Request Food</a>
+    <a href="organizations.html" class="active">Organizations</a>
+    <a href="fund-support.html">Support</a>
+    <a href="leaderboard.html">Leaderboard</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+  </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="donate.html">Donate Food</a>
+  <a href="request.html">Request Food</a>
+  <a href="organizations.html">Organizations</a>
+  <a href="fund-support.html">Support the Mission</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="login.html">Login</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label page-hero-tag">Community Network</span>
+      <h1 class="page-hero-title">Verified Organizations</h1>
+      <p class="page-hero-sub">
+        Every organization on FoodConnect has been reviewed and verified.
+        They coordinate food distribution across Madurai communities.
+      </p>
+      <div class="page-hero-actions">
+        <a href="#register" class="btn btn-primary">Register Your Organization</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================
+       FIND ORGANIZATIONS
+  ============================= -->
+  <section class="section" id="find-orgs">
+    <div class="container">
+      <span class="section-label">Find an Organization</span>
+      <h2 class="section-title">Verified partner organizations</h2>
+      <p class="section-sub" style="margin-bottom:32px;">
+        These organizations have completed verification and are authorized to coordinate food requests.
+      </p>
+
+      <!-- Filter Bar -->
+      <div class="orgs-filter-bar">
+        <input
+          type="text"
+          id="org-search"
+          placeholder="Search by name or area..."
+          aria-label="Search organizations"
+        >
+        <select id="org-type-filter" aria-label="Filter by type" style="min-width:160px;">
+          <option value="">All Types</option>
+          <option value="NGO">NGO</option>
+          <option value="Trust">Trust</option>
+          <option value="Orphanage">Orphanage</option>
+          <option value="Old Age Home">Old Age Home</option>
+          <option value="Shelter">Shelter</option>
+          <option value="Community Organization">Community Organization</option>
+        </select>
+        <select id="org-area-filter" aria-label="Filter by area" style="min-width:150px;">
+          <option value="">All Areas</option>
+        </select>
+      </div>
+
+      <!-- Grid -->
+      <div class="orgs-grid" id="orgs-grid">
+        <!-- Populated by JS -->
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================
+       REGISTER ORGANIZATION
+  ============================= -->
+  <section class="register-section" id="register">
+    <div class="container">
+      <div class="register-layout">
+
+        <!-- Info -->
+        <div class="register-info">
+          <span class="section-label">For Organizations</span>
+          <h2 class="section-title">Register your organization</h2>
+          <p class="section-sub">
+            Community organizations, NGOs, trusts, and shelters can apply to become a verified FoodConnect partner.
+          </p>
+
+          <div class="requirement-list">
+            <div style="font-size:0.875rem; font-weight:700; color:var(--mid-grey); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:8px;">
+              Required Documents
+            </div>
+            <div class="requirement-item">
+              <div class="req-check">1</div>
+              <span>Registration Certificate (PDF, max 5 MB)</span>
+            </div>
+            <div class="requirement-item">
+              <div class="req-check">2</div>
+              <span>Organization ID Proof (PDF, max 5 MB)</span>
+            </div>
+            <div class="requirement-item">
+              <div class="req-check">3</div>
+              <span>Address Proof (PDF, max 5 MB)</span>
+            </div>
+          </div>
+
+          <div style="margin-top:28px; padding:20px; background:var(--green-light); border-radius:var(--radius-lg);">
+            <h4 style="font-size:0.9375rem; font-weight:700; color:var(--green); margin-bottom:8px;">Verification Process</h4>
+            <p style="font-size:0.875rem; color:var(--charcoal); line-height:1.6;">
+              After submission, your application will be reviewed by the FoodConnect admin team.
+              Approved organizations will appear in the verified directory and become available
+              for food requesters to select.
+            </p>
+          </div>
+
+          <div style="margin-top:16px; padding:16px; background:var(--amber-light); border-radius:var(--radius-lg);">
+            <p style="font-size:0.8125rem; color:var(--amber); font-weight:700;">
+              Only PDF documents are accepted. Images, Word documents, and other file types will be rejected.
+            </p>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <div class="form-card" id="register-form-card">
+
+            <div id="register-form-container">
+              <div class="form-card-header">
+                <div class="who-badge">For Organizations</div>
+                <h2 style="font-size:1.15rem; font-weight:800; color:var(--dark); margin-bottom:6px;">Organization Registration</h2>
+                <p style="font-size:0.875rem; color:var(--mid-grey);">
+                  Fill in your organization details and upload the required documents.
+                  All documents must be in PDF format.
+                </p>
+              </div>
+
+              <form id="orgForm" class="form-card-body" novalidate>
+
+                <div class="form-section-label">Organization Details</div>
+
+                <!-- Org Name -->
+                <div class="form-group">
+                  <label class="form-label" for="orgName">Organization Name <span>*</span></label>
+                  <input type="text" id="orgName" class="form-input" placeholder="e.g., Madurai Food Bank" required>
+                </div>
+
+                <!-- Type -->
+                <div class="form-group">
+                  <label class="form-label" for="orgType">Organization Type <span>*</span></label>
+                  <select id="orgType" class="form-select" required>
+                    <option value="">Select type</option>
+                    <option value="NGO">NGO</option>
+                    <option value="Trust">Trust</option>
+                    <option value="Orphanage">Orphanage</option>
+                    <option value="Old Age Home">Old Age Home</option>
+                    <option value="Shelter">Shelter</option>
+                    <option value="Community Organization">Community Organization</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Reg Number -->
+                <div class="form-group">
+                  <label class="form-label" for="orgRegNo">Registration Number <span>*</span></label>
+                  <input type="text" id="orgRegNo" class="form-input" placeholder="e.g., TN/NGO/1234/2024" required>
+                </div>
+
+                <!-- Year -->
+                <div class="form-group">
+                  <label class="form-label" for="orgYear">Year of Registration <span>*</span></label>
+                  <input type="number" id="orgYear" class="form-input" placeholder="e.g., 2020" min="1900" max="2026" required>
+                </div>
+
+                <div class="form-section-label">Contact &amp; Location</div>
+
+                <!-- Representative -->
+                <div class="form-group">
+                  <label class="form-label" for="orgRep">Representative / Handler Name <span>*</span></label>
+                  <input type="text" id="orgRep" class="form-input" placeholder="Contact person's full name" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                  <label class="form-label" for="orgPhone">Contact Number <span>*</span></label>
+                  <div class="phone-group">
+                    <select class="form-select" id="orgCountryCode" aria-label="Country code">
+                      <option value="+91" selected>+91 India</option>
+                      <option value="+1">+1 USA</option>
+                      <option value="+44">+44 UK</option>
+                      <option value="+971">+971 UAE</option>
+                      <option value="+65">+65 Singapore</option>
+                      <option value="+61">+61 Australia</option>
+                    </select>
+                    <input type="tel" id="orgPhone" class="form-input" placeholder="10-digit number" maxlength="10" inputmode="numeric" pattern="[0-9]{10}" required>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label class="form-label" for="orgEmail">Official Email <span>*</span></label>
+                  <input type="email" id="orgEmail" class="form-input" placeholder="info@yourorg.com" required>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                  <label class="form-label" for="orgAddress">Official Address <span>*</span></label>
+                  <textarea id="orgAddress" class="form-textarea" placeholder="Full official address" rows="3" required></textarea>
+                </div>
+
+                <!-- Area -->
+                <div class="form-group">
+                  <label class="form-label" for="orgArea">Area / Locality in Madurai <span>*</span></label>
+                  <input type="text" id="orgArea" class="form-input" placeholder="e.g., Anna Nagar" required>
+                </div>
+
+                <!-- Area of service -->
+                <div class="form-group">
+                  <label class="form-label" for="orgService">Area of Service <span>*</span></label>
+                  <select id="orgService" class="form-select" required>
+                    <option value="">Select who you serve</option>
+                    <option value="Children">Children</option>
+                    <option value="Elderly People">Elderly People</option>
+                    <option value="Families in Need">Families in Need</option>
+                    <option value="Homeless People">Homeless People</option>
+                    <option value="All Communities">All Communities</option>
+                  </select>
+                </div>
+
+                <div class="form-section-label">Documents (PDF only, max 5 MB each)</div>
+
+                <!-- Registration Certificate -->
+                <div class="form-group">
+                  <label class="form-label">Registration Certificate <span>*</span></label>
+                  <div class="file-upload-area" id="reg-cert-area">
+                    <div class="file-upload-icon">
+                      <span class="material-symbols-outlined">upload_file</span>
+                    </div>
+                    <p class="file-upload-label"><strong>Click to upload</strong> or drag and drop</p>
+                    <p class="file-upload-label" style="margin-top:4px; font-size:0.75rem;">PDF only, max 5 MB</p>
+                    <input type="file" id="reg-cert-input" accept=".pdf" aria-label="Registration Certificate">
+                  </div>
+                  <div id="reg-cert-display"></div>
+                </div>
+
+                <!-- ID Proof -->
+                <div class="form-group">
+                  <label class="form-label">Organization ID Proof <span>*</span></label>
+                  <div class="file-upload-area" id="id-proof-area">
+                    <div class="file-upload-icon">
+                      <span class="material-symbols-outlined">upload_file</span>
+                    </div>
+                    <p class="file-upload-label"><strong>Click to upload</strong> or drag and drop</p>
+                    <p class="file-upload-label" style="margin-top:4px; font-size:0.75rem;">PDF only, max 5 MB</p>
+                    <input type="file" id="id-proof-input" accept=".pdf" aria-label="ID Proof">
+                  </div>
+                  <div id="id-proof-display"></div>
+                </div>
+
+                <!-- Address Proof -->
+                <div class="form-group">
+                  <label class="form-label">Address Proof <span>*</span></label>
+                  <div class="file-upload-area" id="addr-proof-area">
+                    <div class="file-upload-icon">
+                      <span class="material-symbols-outlined">upload_file</span>
+                    </div>
+                    <p class="file-upload-label"><strong>Click to upload</strong> or drag and drop</p>
+                    <p class="file-upload-label" style="margin-top:4px; font-size:0.75rem;">PDF only, max 5 MB</p>
+                    <input type="file" id="addr-proof-input" accept=".pdf" aria-label="Address Proof">
+                  </div>
+                  <div id="addr-proof-display"></div>
+                </div>
+
+              </form>
+
+              <div class="form-card-footer">
+                <button type="button" id="org-submit-btn" class="btn btn-primary submit-btn-full btn-lg">
+                  Submit for Verification
+                </button>
+                <p style="font-size:0.8rem; color:var(--mid-grey); margin-top:12px; text-align:center;">
+                  Your application will be reviewed by the admin team within 2–3 business days.
+                </p>
+              </div>
+            </div>
+
+            <!-- Success -->
+            <div class="success-state" id="org-success">
+              <div class="success-icon">
+                <span class="material-symbols-outlined" style="color:var(--amber)">hourglass_top</span>
+              </div>
+              <h3>Application submitted.</h3>
+              <p>Your organization is now pending admin verification. You will be added to the verified directory once approved.</p>
+              <div class="ref-id" id="org-ref-id"></div>
+              <div style="padding:12px 16px; background:var(--amber-light); border-radius:var(--radius-md); font-size:0.875rem; color:var(--amber); font-weight:700; text-align:center;">
+                Status: Pending Verification
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="resetOrgForm()">Submit Another</button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Food<span style="color:var(--accent)">Connect</span></a>
+        <p>Connecting surplus food with people and organizations that need it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="donate.html">Donate Food</a>
+        <a href="request.html">Request Food</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Organizations</h4>
+        <a href="organizations.html">Find Organizations</a>
+        <a href="organizations.html#register">Register Org</a>
+      </div>
+      <div class="footer-col">
+        <h4>Admin</h4>
+        <a href="login.html">Admin Login</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 FoodConnect. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Leaflet JS -->
+
+<script src="js/storage.js?v=3"></script>
+<script src="js/ui.js"></script>
+<script>
+/* === ORG TYPE ICONS === */
+const ORG_ICONS = {
+  'NGO':                    'handshake',
+  'Trust':                  'volunteer_activism',
+  'Orphanage':              'child_care',
+  'Old Age Home':           'elderly',
+  'Shelter':                'home',
+  'Community Organization': 'groups',
+  'Other':                  'business'
+};
+
+/* === LOAD ORGS GRID === */
+function loadOrgsGrid(filter = {}) {
+  const grid   = document.getElementById('orgs-grid');
+  let   trusts = getTrusts().filter(t => t.status === 'Approved');
+
+  if (filter.search) {
+    const q = filter.search.toLowerCase();
+    trusts = trusts.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      (t.area || '').toLowerCase().includes(q) ||
+      (t.address || '').toLowerCase().includes(q)
+    );
+  }
+
+  if (filter.type) {
+    trusts = trusts.filter(t => (t.type || t.orgType) === filter.type);
+  }
+
+  if (filter.area) {
+    trusts = trusts.filter(t => (t.area || '').toLowerCase() === filter.area.toLowerCase());
+  }
+
+  if (!trusts.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+      <div class="empty-icon"><span class="material-symbols-outlined">domain_disabled</span></div>
+      <h3>No organizations found</h3>
+      <p>Try adjusting your search filters, or register your organization below.</p>
+      <a href="#register" class="btn btn-primary" style="margin-top:14px;">Register Organization</a>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = trusts.map(t => `
+    <div class="org-card">
+      <div class="org-card-top">
+        <div style="flex:1;">
+          <div class="org-card-name">${t.name}</div>
+          <div class="org-card-type">${t.type || t.orgType}</div>
+        </div>
+        <div class="org-card-icon">
+          <span class="material-symbols-outlined">${ORG_ICONS[t.type || t.orgType] || 'business'}</span>
+        </div>
+      </div>
+      <div style="margin-top:4px;">
+        <span class="verified-mark">Verified</span>
+      </div>
+      <div class="org-card-details">
+        <div class="org-detail-row">
+          <span class="material-symbols-outlined org-detail-icon">location_on</span>
+          <span>${t.area || ''}, Madurai ${t.pincode ? '- ' + t.pincode : ''}</span>
+        </div>
+        <div class="org-detail-row">
+          <span class="material-symbols-outlined org-detail-icon">groups</span>
+          <span>Serves: ${t.support || 'Community'}</span>
+        </div>
+        ${t.email ? `<div class="org-detail-row">
+          <span class="material-symbols-outlined org-detail-icon">mail</span>
+          <span>${t.email}</span>
+        </div>` : ''}
+      </div>
+      <div class="org-card-footer">
+        <span class="badge badge-green">Active</span>
+        <a href="request.html" class="btn btn-primary btn-sm">Request Food</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* === POPULATE AREA FILTER === */
+function populateAreaFilter() {
+  const select = document.getElementById('org-area-filter');
+  const areas  = [...new Set(getTrusts().filter(t => t.status === 'Approved').map(t => t.area).filter(Boolean))];
+  areas.forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a;
+    opt.textContent = a;
+    select.appendChild(opt);
+  });
+}
+
+/* === FILTER EVENTS === */
+function getFilters() {
+  return {
+    search: document.getElementById('org-search').value.trim(),
+    type:   document.getElementById('org-type-filter').value,
+    area:   document.getElementById('org-area-filter').value
+  };
+}
+
+['org-search','org-type-filter','org-area-filter'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('input', () => loadOrgsGrid(getFilters()));
+});
+
+
+/* === ORG REGISTRATION FORM === */
+document.addEventListener('DOMContentLoaded', () => {
+  /* Essential form controls first. */
+  try { buildPhoneSelect('orgCountryCode', 'orgPhone'); } catch (e) { console.warn('Phone selector initialization skipped:', e); }
+
+  try {
+    initFileUpload('reg-cert-area',  'reg-cert-input',  'reg-cert-display');
+    initFileUpload('id-proof-area',  'id-proof-input',  'id-proof-display');
+    initFileUpload('addr-proof-area','addr-proof-input', 'addr-proof-display');
+  } catch (e) { console.warn('File upload initialization skipped:', e); }
+
+  /* Page enhancements */
+  try { loadOrgsGrid(); } catch (e) { console.warn('Organization list failed:', e); }
+  try { populateAreaFilter(); } catch (e) { console.warn('Area filter failed:', e); }
+  try { initLocationAutocomplete('orgArea'); } catch (e) { console.warn('Location autocomplete skipped:', e); }
+
+  const orgPhoneInput = document.getElementById('orgPhone');
+  if (orgPhoneInput) {
+    orgPhoneInput.maxLength = 10;
+    orgPhoneInput.addEventListener('input', () => {
+      orgPhoneInput.value = orgPhoneInput.value.replace(/\D/g, '').slice(0, 10);
+    });
+  }
+
+  document.getElementById('org-submit-btn').addEventListener('click', handleOrgSubmit);
+  document.getElementById('orgForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    handleOrgSubmit();
+  });
+
+  /* Scroll to register if URL has #register */
+  if (window.location.hash === '#register') {
+    setTimeout(() => {
+      document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  }
+});
+
+async function handleOrgSubmit() {
+  const name=document.getElementById('orgName').value.trim();
+  const type=document.getElementById('orgType').value;
+  const regNo=document.getElementById('orgRegNo').value.trim();
+  const year=document.getElementById('orgYear').value;
+  const rep=document.getElementById('orgRep').value.trim();
+  const countryCode=document.getElementById('orgCountryCode').value;
+  const phone=document.getElementById('orgPhone').value.trim();
+  const email=document.getElementById('orgEmail').value.trim();
+  const address=document.getElementById('orgAddress').value.trim();
+  const area=document.getElementById('orgArea').value.trim();
+  const service=document.getElementById('orgService').value;
+  const regCertFile=document.getElementById('reg-cert-input').files[0];
+  const idProofFile=document.getElementById('id-proof-input').files[0];
+  const addrProofFile=document.getElementById('addr-proof-input').files[0];
+  let valid=true;
+  const required=[['orgName',name,'Please enter the organization name.'],['orgType',type,'Please select the organization type.'],['orgRegNo',regNo,'Please enter the registration number.'],['orgYear',year,'Please enter the year of registration.'],['orgRep',rep,'Please enter the representative name.'],['orgAddress',address,'Please enter the official address.'],['orgArea',area,'Please enter the area or locality.'],['orgService',service,'Please select an area of service.']];
+  required.forEach(([id,val,msg])=>{if(!val){showFieldError(id,msg);valid=false}else clearFieldError(id)});
+  if(!email||!validateEmail(email)){showFieldError('orgEmail','Please enter a valid email address.');valid=false}else clearFieldError('orgEmail');
+  if(!phone||!validatePhone(phone,countryCode)){showFieldError('orgPhone','Please enter a valid 10 digit mobile number.');valid=false}else clearFieldError('orgPhone');
+  if(!regCertFile||!idProofFile||!addrProofFile){showToast('Please upload all three required PDF documents.','error');valid=false;}
+  if(!valid){showToast('Please complete all required fields.','warn');return;}
+  const files=[regCertFile,idProofFile,addrProofFile];
+  if(files.some(f=>f.type!=='application/pdf'||f.size>5*1024*1024)){showToast('Each document must be a PDF under 5 MB.','error');return;}
+  const id=generateId('TRUST');
+  const docKeys={registrationCertificate:`${id}-registrationCertificate`,trustIdProof:`${id}-trustIdProof`,addressProof:`${id}-addressProof`};
+  const newTrust={id,name,type,orgType:type,registrationNumber:regNo,year,contactPerson:rep,contact:`${countryCode} ${phone}`,email,address,area,support:service,status:'Pending',isDemo:false,submittedAt:new Date().toISOString(),documents:{registrationCertificate:{name:regCertFile.name,type:regCertFile.type,size:regCertFile.size,dbKey:docKeys.registrationCertificate},trustIdProof:{name:idProofFile.name,type:idProofFile.type,size:idProofFile.size,dbKey:docKeys.trustIdProof},addressProof:{name:addrProofFile.name,type:addrProofFile.type,size:addrProofFile.size,dbKey:docKeys.addressProof}}};
+  try {
+    await saveOrganizationDocument(docKeys.registrationCertificate,regCertFile);
+    await saveOrganizationDocument(docKeys.trustIdProof,idProofFile);
+    await saveOrganizationDocument(docKeys.addressProof,addrProofFile);
+    addTrust(newTrust);
+  } catch(e) {
+    showToast('Document storage failed. Please try again in Chrome/Edge.','error');
+    return;
+  }
+  showToast('Application submitted successfully. Awaiting admin verification.','success');
+  document.getElementById('register-form-container').style.display='none';
+  document.getElementById('org-success').classList.add('active');
+  document.getElementById('org-ref-id').textContent=`Application ID: ${newTrust.id}`;
+}
+function resetOrgForm() {
+  document.getElementById('orgForm').reset();
+  document.getElementById('register-form-container').style.display = '';
+  document.getElementById('org-success').classList.remove('active');
+  clearAllErrors(document.getElementById('orgForm'));
+  ['reg-cert-display','id-proof-display','addr-proof-display'].forEach(id => {
+    document.getElementById(id).innerHTML = '';
+  });
+  ['reg-cert-input','id-proof-input','addr-proof-input'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+}
+</script>
+
+</body>
+</html>

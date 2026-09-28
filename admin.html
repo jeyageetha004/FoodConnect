@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — FoodConnect</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<!-- ============================================
+     ADMIN AUTH CHECK
+============================================= -->
+<script>
+  /* Must run BEFORE body renders */
+  (function() {
+    const role = sessionStorage.getItem('foodConnectRole');
+    if (role !== 'admin') {
+      window.location.href = 'login.html';
+    }
+  })();
+</script>
+
+<!-- Navbar -->
+<header class="navbar">
+  <a href="index.html" class="nav-logo">Food<span>Connect</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Back to Site</a>
+  </nav>
+  <div class="nav-cta">
+    <button class="btn btn-ghost btn-sm" onclick="logout()">Logout</button>
+  </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="page-wrapper">
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-logo">
+        <span>Admin Panel</span>
+      </div>
+
+      <button class="admin-nav-item active" id="nav-overview" onclick="showPanel('overview')">
+        <span class="admin-nav-icon material-symbols-outlined">dashboard</span>
+        Overview
+      </button>
+      <button class="admin-nav-item" id="nav-orgs" onclick="showPanel('orgs')">
+        <span class="admin-nav-icon material-symbols-outlined">verified</span>
+        Organizations
+        <span class="badge badge-amber" id="pending-badge" style="margin-left:auto; display:none;"></span>
+      </button>
+      <button class="admin-nav-item" id="nav-donations" onclick="showPanel('donations')">
+        <span class="admin-nav-icon material-symbols-outlined">volunteer_activism</span>
+        Food Donations
+      </button>
+      <button class="admin-nav-item" id="nav-requests" onclick="showPanel('requests')">
+        <span class="admin-nav-icon material-symbols-outlined">restaurant</span>
+        Food Requests
+      </button>
+      <button class="admin-nav-item" id="nav-funds" onclick="showPanel('funds')">
+        <span class="admin-nav-icon material-symbols-outlined">payments</span>
+        Fund Support
+      </button>
+      <button class="admin-nav-item" id="nav-leaderboard" onclick="showPanel('leaderboard')">
+        <span class="admin-nav-icon material-symbols-outlined">emoji_events</span>
+        Leaderboard
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-content">
+
+      <!-- ===== OVERVIEW ===== -->
+      <div class="admin-panel active" id="panel-overview">
+        <h1 class="admin-section-title">
+          <span class="material-symbols-outlined">dashboard</span>
+          Dashboard Overview
+        </h1>
+
+        <div class="admin-overview-grid">
+          <div class="admin-stat-card green">
+            <div class="admin-stat-label">Food Donations</div>
+            <div class="admin-stat-value" id="ov-donations">0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Food Requests</div>
+            <div class="admin-stat-value" id="ov-requests">0</div>
+          </div>
+          <div class="admin-stat-card amber">
+            <div class="admin-stat-label">Pending Verifications</div>
+            <div class="admin-stat-value" id="ov-pending">0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Verified Organizations</div>
+            <div class="admin-stat-value" id="ov-orgs">0</div>
+          </div>
+          <div class="admin-stat-card green">
+            <div class="admin-stat-label">Total Meals Shared</div>
+            <div class="admin-stat-value" id="ov-meals">0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Fund Contributions</div>
+            <div class="admin-stat-value" id="ov-funds">0</div>
+          </div>
+          <div class="admin-stat-card green">
+            <div class="admin-stat-label">Total Funds Raised</div>
+            <div class="admin-stat-value" id="ov-funds-total">Rs. 0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Community Points</div>
+            <div class="admin-stat-value" id="ov-points">0</div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+          <button class="btn btn-primary" onclick="showPanel('orgs')">Review Pending Orgs</button>
+          <button class="btn btn-ghost" onclick="showPanel('donations')">View Donations</button>
+          <button class="btn btn-ghost" onclick="showPanel('requests')">View Requests</button>
+        </div>
+      </div>
+
+
+      <!-- ===== ORGANIZATIONS ===== -->
+      <div class="admin-panel" id="panel-orgs">
+        <h1 class="admin-section-title">
+          <span class="material-symbols-outlined">verified</span>
+          Organizations &amp; Verification
+        </h1>
+
+        <!-- Filter tabs -->
+        <div style="display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;">
+          <button class="sort-btn active" id="org-filter-all"      onclick="filterOrgsAdmin('all')">All</button>
+          <button class="sort-btn"        id="org-filter-pending"  onclick="filterOrgsAdmin('Pending')">Pending</button>
+          <button class="sort-btn"        id="org-filter-approved" onclick="filterOrgsAdmin('Approved')">Approved</button>
+          <button class="sort-btn"        id="org-filter-rejected" onclick="filterOrgsAdmin('Rejected')">Rejected</button>
+        </div>
+
+        <div id="admin-orgs-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+
+      <!-- ===== FOOD DONATIONS ===== -->
+      <div class="admin-panel" id="panel-donations">
+        <h1 class="admin-section-title">
+          <span class="material-symbols-outlined">volunteer_activism</span>
+          Food Donations
+        </h1>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Donor</th>
+                <th>Food</th>
+                <th>Type</th>
+                <th>Location</th>
+                <th>Qty</th>
+                <th>Remaining</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+            <tbody id="donations-tbody">
+              <tr><td colspan="7" style="text-align:center; color:var(--mid-grey); padding:32px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- ===== FOOD REQUESTS ===== -->
+      <div class="admin-panel" id="panel-requests">
+        <h1 class="admin-section-title">
+          <span class="material-symbols-outlined">restaurant</span>
+          Food Requests
+        </h1>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Requester</th>
+                <th>Food</th>
+                <th>Donor</th>
+                <th>Location</th>
+                <th>Portions</th>
+                <th>Organization</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="requests-tbody">
+              <tr><td colspan="7" style="text-align:center; color:var(--mid-grey); padding:32px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- ===== FUND SUPPORT ===== -->
+      <div class="admin-panel" id="panel-funds">
+        <h1 class="admin-section-title">
+          <span class="material-symbols-outlined">payments</span>
+          Fund Contributions
+        </h1>
+
+        <div class="admin-overview-grid" style="grid-template-columns:repeat(3,1fr); margin-bottom:24px;">
+          <div class="admin-stat-card green">
+            <div class="admin-stat-label">Total Raised</div>
+            <div class="admin-stat-value" id="fund-total-display">Rs. 0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Contributors</div>
+            <div class="admin-stat-value" id="fund-count-display">0</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-label">Average Contribution</div>
+            <div class="admin-stat-value" id="fund-avg-display">Rs. 0</div>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Contributor</th>
+                <th>Amount</th>
+                <th>Purpose</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="funds-tbody">
+              <tr><td colspan="6" style="text-align:center; color:var(--mid-grey); padding:32px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+      <!-- ===== LEADERBOARD ===== -->
+      <div class="admin-panel" id="panel-leaderboard">
+        <h1 class="admin-section-title">
+          <span class="material-symbols-outlined">emoji_events</span>
+          Community Leaderboard
+        </h1>
+        <div class="admin-table-card">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Donor</th>
+                <th>Donations</th>
+                <th>People Helped</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody id="lb-tbody">
+              <tr><td colspan="5" style="text-align:center; color:var(--mid-grey); padding:32px;">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+
+<script src="js/storage.js?v=3"></script>
+<script src="js/ui.js"></script>
+<script>
+/* =====================================================
+   ADMIN PANEL NAVIGATION
+===================================================== */
+
+function showPanel(name) {
+  /* Hide all panels */
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-nav-item').forEach(n => n.classList.remove('active'));
+
+  document.getElementById('panel-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+
+  /* Load data for the panel */
+  const loaders = {
+    overview:    loadOverview,
+    orgs:        () => loadOrgsAdmin('all'),
+    donations:   loadDonationsAdmin,
+    requests:    loadRequestsAdmin,
+    funds:       loadFundsAdmin,
+    leaderboard: loadLeaderboardAdmin
+  };
+
+  if (loaders[name]) loaders[name]();
+}
+
+/* =====================================================
+   OVERVIEW
+===================================================== */
+
+function loadOverview() {
+  const stats   = getSiteStats();
+  const trusts  = getTrusts();
+  const funds   = getFunds();
+  const leaders = computeLeaderboard();
+  const pending = trusts.filter(t => t.status === 'Pending').length;
+  const totalFunds = funds.reduce((s, f) => s + (Number(f.amount) || 0), 0);
+  const totalPts   = leaders.reduce((s, l) => s + l.points, 0);
+
+  document.getElementById('ov-donations').textContent = stats.donations;
+  document.getElementById('ov-requests').textContent  = stats.requests;
+  document.getElementById('ov-pending').textContent   = pending;
+  document.getElementById('ov-orgs').textContent      = stats.orgs;
+  document.getElementById('ov-meals').textContent     = stats.meals;
+  document.getElementById('ov-funds').textContent     = funds.length;
+  document.getElementById('ov-funds-total').textContent = `Rs. ${totalFunds.toLocaleString('en-IN')}`;
+  document.getElementById('ov-points').textContent    = totalPts;
+
+  /* Pending badge in sidebar */
+  const badge = document.getElementById('pending-badge');
+  if (pending > 0) {
+    badge.textContent  = pending;
+    badge.style.display = '';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+/* =====================================================
+   ORGANIZATIONS
+===================================================== */
+
+let currentOrgFilter = 'all';
+
+function filterOrgsAdmin(filter) {
+  currentOrgFilter = filter;
+  document.querySelectorAll('[id^="org-filter-"]').forEach(b => b.classList.remove('active'));
+  document.getElementById(`org-filter-${filter === 'all' ? 'all' : filter.toLowerCase()}`).classList.add('active');
+  loadOrgsAdmin(filter);
+}
+
+function loadOrgsAdmin(filter = 'all') {
+  const container = document.getElementById('admin-orgs-container');
+  let trusts = getTrusts();
+
+  if (filter !== 'all') {
+    trusts = trusts.filter(t => t.status === filter);
+  }
+
+  if (!trusts.length) {
+    container.innerHTML = `<div class="empty-state"><h3>No organizations found</h3><p>No organizations match this filter.</p></div>`;
+    return;
+  }
+
+  container.innerHTML = trusts.map(t => {
+    let statusBadge = '';
+    if (t.status === 'Approved')  statusBadge = `<span class="badge badge-green">Verified</span>`;
+    if (t.status === 'Pending')   statusBadge = `<span class="badge badge-amber">Pending</span>`;
+    if (t.status === 'Rejected')  statusBadge = `<span class="badge badge-red">Rejected</span>`;
+
+    let actions = '';
+    if (t.status === 'Pending') {
+      actions = `
+        <div class="admin-ngo-footer">
+          <button class="btn btn-primary btn-sm" onclick="adminApproveTrust('${t.id}')">Approve Organization</button>
+          <button class="btn btn-danger btn-sm" onclick="adminRejectTrust('${t.id}')">Reject</button>
+        </div>
+      `;
+    } else if (t.status === 'Approved') {
+      actions = `
+        <div class="admin-ngo-footer">
+          <span style="font-size:0.875rem; color:var(--green); font-weight:700;">
+            Organization is verified and visible to food requesters.
+          </span>
+          <button class="btn btn-danger btn-sm" onclick="adminRejectTrust('${t.id}')">Revoke</button>
+        </div>
+      `;
+    } else {
+      actions = `
+        <div class="admin-ngo-footer">
+          <span style="font-size:0.875rem; color:var(--red); font-weight:700;">
+            Organization has been rejected.
+          </span>
+          <button class="btn btn-primary btn-sm" onclick="adminApproveTrust('${t.id}')">Re-approve</button>
+        </div>
+      `;
+    }
+
+    const docs = t.documents || {};
+    const docItems = [
+      ['registrationCertificate', 'Registration Certificate'],
+      ['trustIdProof', 'ID Proof'],
+      ['addressProof', 'Address Proof']
+    ].map(([key, label]) => {
+      const doc = docs[key];
+      if (!doc) return `<div class="admin-doc-chip"><span class="material-symbols-outlined" style="font-size:0.9rem">description</span>${label}: Not uploaded</div>`;
+      return `<div class="admin-doc-chip">
+        <span class="material-symbols-outlined" style="font-size:0.9rem">picture_as_pdf</span>
+        ${label}: ${doc.name}
+        ${(doc.dbKey || doc.data) ? `<button class="admin-doc-view" onclick="viewOrgDoc('${t.id}','${key}')">View</button>` : ''}
+      </div>`;
+    }).join('');
+
+    return `
+      <div class="admin-ngo-card" id="org-card-${t.id}">
+        <div class="admin-ngo-header">
+          <div>
+            <div class="admin-ngo-name">${t.name}</div>
+            <div class="admin-ngo-id">ID: ${t.id}</div>
+          </div>
+          ${statusBadge}
+        </div>
+
+        <div class="admin-ngo-details">
+          <div class="admin-detail-item">
+            <label>Type</label>
+            <span>${t.type || t.orgType}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Reg. Number</label>
+            <span>${t.registrationNumber || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Year</label>
+            <span>${t.year || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Representative</label>
+            <span>${t.contactPerson || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Contact</label>
+            <span>${t.contact || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Email</label>
+            <span>${t.email || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Area</label>
+            <span>${t.area || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Serves</label>
+            <span>${t.support || '-'}</span>
+          </div>
+          <div class="admin-detail-item">
+            <label>Submitted</label>
+            <span>${formatAdminDate(t.submittedAt)}</span>
+          </div>
+          ${t.isDemo ? `<div class="admin-detail-item">
+            <label>Type</label>
+            <span><span class="badge badge-grey">Demo Data</span></span>
+          </div>` : ''}
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--mid-grey); margin-bottom:10px;">Documents</div>
+          <div class="admin-doc-list">${docItems}</div>
+        </div>
+
+        <div style="font-size:0.875rem; color:var(--mid-grey); margin-bottom:4px;"><strong>Address:</strong> ${t.address || '-'}</div>
+
+        ${actions}
+      </div>
+    `;
+  }).join('');
+}
+
+function adminApproveTrust(trustId) {
+  const trust = getTrustById(trustId);
+  if (!trust) return;
+
+  if (!confirm(`Approve ${trust.name} as a verified organization?`)) return;
+
+  updateTrustStatus(trustId, 'Approved', { verifiedAt: new Date().toLocaleString() });
+  showToast(`${trust.name} has been approved.`, 'success');
+  loadOrgsAdmin(currentOrgFilter);
+  loadOverview();
+}
+
+function adminRejectTrust(trustId) {
+  const trust = getTrustById(trustId);
+  if (!trust) return;
+
+  if (!confirm(`Reject or revoke ${trust.name}?`)) return;
+
+  updateTrustStatus(trustId, 'Rejected', { rejectedAt: new Date().toLocaleString() });
+  showToast(`${trust.name} has been rejected.`, 'warn');
+  loadOrgsAdmin(currentOrgFilter);
+  loadOverview();
+}
+
+function formatAdminDate(value) {
+  if (!value) return '-';
+  const d = new Date(String(value));
+  if (Number.isNaN(d.getTime())) return String(value).split('T')[0] || '-';
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = d.getFullYear();
+  return `${day}-${month}-${year}`;
+}
+
+let activeAdminDocumentUrl = '';
+
+async function viewOrgDoc(trustId, docKey) {
+  const trust = getTrustById(trustId);
+  const doc = trust && trust.documents ? trust.documents[docKey] : null;
+  if (!doc) { showToast('Document not available.', 'error'); return; }
+
+  let url = '';
+  try {
+    if (doc.dbKey && typeof getOrganizationDocument === 'function') {
+      const stored = await getOrganizationDocument(doc.dbKey);
+      if (stored && stored.blob) url = URL.createObjectURL(stored.blob);
+    }
+    if (!url && doc.data && String(doc.data).startsWith('data:')) url = doc.data;
+
+    if (!url) {
+      showToast('This document is not stored in this browser. Please re-submit the organization documents from this project.', 'error');
+      return;
+    }
+
+    if (activeAdminDocumentUrl && activeAdminDocumentUrl.startsWith('blob:')) {
+      try { URL.revokeObjectURL(activeAdminDocumentUrl); } catch (_) {}
+    }
+    activeAdminDocumentUrl = url;
+
+    let modal = document.getElementById('admin-pdf-viewer');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'admin-pdf-viewer';
+      modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+      modal.innerHTML = `
+        <div style="width:min(1100px,96vw);height:min(88vh,900px);background:#fff;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35)">
+          <div style="height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid #e5e7eb;background:#fff">
+            <strong id="admin-pdf-title" style="font-size:15px;color:#1f2937">Document</strong>
+            <div style="display:flex;gap:8px;align-items:center">
+              <a id="admin-pdf-new-tab" href="#" target="_blank" rel="noopener" style="padding:9px 12px;border:1px solid #15803d;border-radius:8px;color:#15803d;text-decoration:none;font-weight:700;font-size:13px">Open in New Tab</a>
+              <button type="button" id="admin-pdf-close" style="padding:9px 14px;border:0;border-radius:8px;background:#ef4444;color:#fff;font-weight:700;cursor:pointer">Close</button>
+            </div>
+          </div>
+          <div style="flex:1;background:#52525b;min-height:0">
+            <iframe id="admin-pdf-frame" title="Organization document" style="width:100%;height:100%;border:0;background:#fff"></iframe>
+          </div>
+        </div>`;
+      document.body.appendChild(modal);
+      document.getElementById('admin-pdf-close').addEventListener('click', closeAdminPdfViewer);
+      modal.addEventListener('click', e => { if (e.target === modal) closeAdminPdfViewer(); });
+    }
+
+    const titles = {
+      registrationCertificate: 'Registration Certificate',
+      trustIdProof: 'Organization ID Proof',
+      addressProof: 'Address Proof'
+    };
+    document.getElementById('admin-pdf-title').textContent = `${titles[docKey] || 'Organization Document'} — ${doc.name || 'PDF'}`;
+    document.getElementById('admin-pdf-frame').src = url;
+    document.getElementById('admin-pdf-new-tab').href = url;
+    modal.style.display = 'flex';
+  } catch (e) {
+    console.error(e);
+    showToast('Unable to open document.', 'error');
+  }
+}
+
+function closeAdminPdfViewer() {
+  const modal = document.getElementById('admin-pdf-viewer');
+  if (!modal) return;
+  const frame = document.getElementById('admin-pdf-frame');
+  if (frame) frame.src = 'about:blank';
+  modal.style.display = 'none';
+  if (activeAdminDocumentUrl && activeAdminDocumentUrl.startsWith('blob:')) {
+    try { URL.revokeObjectURL(activeAdminDocumentUrl); } catch (_) {}
+  }
+  activeAdminDocumentUrl = '';
+}
+
+
+/* =====================================================
+   FOOD DONATIONS
+===================================================== */
+
+function loadDonationsAdmin() {
+  const tbody=document.getElementById('donations-tbody'); const foods=getFoods();
+  if(!foods.length){tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--mid-grey);padding:32px;">No food donations yet.</td></tr>';return;}
+  tbody.innerHTML=foods.map(f=>`<tr><td><strong>${f.donorName}</strong></td><td>${f.foodName||'Community Meal'}</td><td>${f.foodType||'-'}</td><td>${f.location}</td><td>${f.quantity}</td><td>${f.remainingQuantity}</td><td>${f.donorContact}</td><td style="font-size:.8rem;">${f.submittedAt||'-'}</td></tr>`).join('');
+}
+
+/* =====================================================
+   FOOD REQUESTS
+===================================================== */
+
+const REQUEST_STATUS_FLOW = ['Pending','Accepted','Preparing','Out for Delivery','Delivered'];
+
+function loadRequestsAdmin() {
+  const tbody=document.getElementById('requests-tbody');
+  const rows=[];
+  getFoods().forEach(f=>(f.requests||[]).forEach(r=>rows.push({food:f,r})));
+  if(!rows.length){tbody.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--mid-grey);padding:32px;">No food requests yet.</td></tr>';return;}
+  tbody.innerHTML=rows.map(({food:rfood,r})=>{const st=r.status||'Request Received';const cls=st==='Rejected'?'badge-red':['Accepted','Food Packing','Out for Delivery','Delivered'].includes(st)?'badge-green':'badge-amber';return `<tr><td><strong>${r.name||r.requesterName}</strong></td><td>${rfood.foodName||'Community Meal'}</td><td>${rfood.donorName||'-'}</td><td>${r.location||'-'}</td><td>${r.people||r.portions||0}</td><td>${r.trustName||'-'}</td><td style="font-size:.8rem;">${r.submittedAt||'-'}</td><td><span class="badge ${cls}">${st}</span></td></tr>`;}).join('');
+}
+
+/* Food requests are controlled by the donor, not by admin. */
+function advanceRequest(){ showToast('Food request status is managed by the donor.','info'); }
+function cancelRequest(){ showToast('Food request cancellation is managed by the donor.','info'); }
+
+
+/* =====================================================
+   FUND SUPPORT
+===================================================== */
+
+function loadFundsAdmin() {
+  const tbody = document.getElementById('funds-tbody');
+  const funds = getFunds();
+
+  const total = funds.reduce((s, f) => s + (Number(f.amount) || 0), 0);
+  const avg   = funds.length ? Math.round(total / funds.length) : 0;
+
+  document.getElementById('fund-total-display').textContent = `Rs. ${total.toLocaleString('en-IN')}`;
+  document.getElementById('fund-count-display').textContent = funds.length;
+  document.getElementById('fund-avg-display').textContent   = `Rs. ${avg.toLocaleString('en-IN')}`;
+
+  if (!funds.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--mid-grey);padding:32px;">No fund contributions yet.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = funds.map(f => `
+    <tr>
+      <td><strong>${f.name}</strong>${f.anonymous ? ' <span class="badge badge-grey" style="font-size:0.7rem;">Anon</span>' : ''}</td>
+      <td><strong>Rs. ${Number(f.amount).toLocaleString('en-IN')}</strong></td>
+      <td>${f.purpose}</td>
+      <td>${f.contact || f.email || '-'}</td>
+      <td style="font-size:0.8rem;">${f.submittedAt || '-'}</td>
+      <td><span class="badge badge-amber">${f.status}</span></td>
+    </tr>
+  `).join('');
+}
+
+
+/* =====================================================
+   LEADERBOARD
+===================================================== */
+
+function loadLeaderboardAdmin() {
+  const tbody   = document.getElementById('lb-tbody');
+  const leaders = computeLeaderboard();
+
+  if (!leaders.length) {
+    tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--mid-grey);padding:32px;">No donation data yet.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = leaders.map((l, i) => `
+    <tr>
+      <td><strong>#${i + 1}</strong></td>
+      <td>${l.name} ${i < 3 ? '<span class="badge badge-accent" style="font-size:0.7rem;">Top Donor</span>' : ''}</td>
+      <td>${l.donations}</td>
+      <td>${l.people}</td>
+      <td><strong style="color:var(--green);">${l.points} pts</strong></td>
+    </tr>
+  `).join('');
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout() {
+  sessionStorage.removeItem('foodConnectRole');
+  window.location.href = 'login.html';
+}
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadOverview();
+
+  /* Hamburger for admin sidebar toggle on mobile */
+  const hamburger = document.getElementById('hamburger-btn');
+  const sidebar   = document.querySelector('.admin-sidebar');
+  if (hamburger && sidebar) {
+    hamburger.addEventListener('click', () => {
+      sidebar.style.display = sidebar.style.display === 'none' ? '' : 'none';
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Food — FoodConnect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/pages.css">
+</head><body>
+<header class="navbar"><a href="index.html" class="nav-logo">Food<span>Connect</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="donate.html">Donate</a><a href="request.html" class="active">Request Food</a><a href="organizations.html">Organizations</a><a href="fund-support.html">Support</a><a href="leaderboard.html">Leaderboard</a></nav><div class="nav-cta"><a href="login.html" class="btn btn-primary btn-sm">Login</a></div><button class="hamburger" id="hamburger-btn" aria-label="Menu"><span></span><span></span><span></span></button></header>
+<nav class="mobile-menu" id="mobile-menu"><a href="index.html">Home</a><a href="about.html">About</a><a href="donate.html">Donate Food</a><a href="request.html">Request Food</a><a href="organizations.html">Organizations</a><a href="fund-support.html">Support the Mission</a><a href="leaderboard.html">Leaderboard</a><a href="login.html">Login</a></nav>
+<div class="page-wrapper">
+<div class="page-hero"><div class="container"><span class="section-label page-hero-tag">For Food Requesters</span><h1 class="page-hero-title">Choose the food you need</h1><p class="page-hero-sub">See live available donations first. Choose a specific food, select the quantity you need, and send the request directly to that donor.</p></div></div>
+<section class="section"><div class="container">
+<div class="available-food-header"><div><span class="section-label">Available Now</span><h2 class="section-title">Food donated by the community</h2><p class="section-sub">Only food with portions still available is shown here.</p></div><input id="food-search" class="form-input food-search-input" placeholder="Search food..." aria-label="Search food"></div>
+<div id="available-foods" class="available-food-grid"></div>
+
+<div id="request-form-section" class="request-form-panel hidden" style="margin-top:48px;">
+<div class="form-card"><div class="form-card-header"><div class="who-badge">Request Selected Food</div><h2 id="selected-food-title" style="font-size:1.25rem;font-weight:800;color:var(--dark);margin-bottom:6px;">Select a food above</h2><p id="selected-food-summary" style="font-size:.875rem;color:var(--mid-grey);">Your request will go directly to the donor.</p></div>
+<form id="requestForm" class="form-card-body" novalidate>
+<input type="hidden" id="selectedFoodId">
+<div class="form-group"><label class="form-label" for="reqName">Your Name <span>*</span></label><input type="text" id="reqName" class="form-input" placeholder="e.g., Lakshmi Priya" required></div>
+<div class="form-group"><label class="form-label" for="reqPhone">Contact Number <span>*</span></label><div class="phone-group"><select class="form-select" id="reqCountryCode" aria-label="Country code"></select><input type="tel" id="reqPhone" class="form-input" placeholder="10-digit number" maxlength="10" inputmode="numeric" required></div></div>
+<div class="form-group"><label class="form-label" for="reqLocation">Your Location <span>*</span></label><input type="text" id="reqLocation" class="form-input" placeholder="e.g., Thirunagar, Madurai" required></div>
+<div class="form-group"><label class="form-label" for="reqPortions">Quantity Needed <span>*</span></label><p class="form-hint" id="available-quantity-hint">Enter the number of portions you need.</p><input type="number" id="reqPortions" class="form-input" min="1" required></div>
+<div class="form-group"><label class="form-label" for="reqTrust">Verified Organization <span>*</span></label><p class="form-hint">Select an approved organization for coordination.</p><select class="form-select" id="reqTrust" required></select><div id="req-trust-info" class="org-info-box" style="display:none;"></div></div>
+</form><div class="form-card-footer"><button type="button" id="request-submit-btn" class="btn btn-primary submit-btn-full btn-lg">Send Request to Donor</button><button type="button" id="cancel-request-btn" class="btn btn-ghost submit-btn-full" style="margin-top:8px;">Choose Another Food</button><p id="request-message" style="font-size:.82rem;color:var(--mid-grey);margin-top:12px;text-align:center;"></p></div></div></div>
+
+<div class="tracking-section"><div class="section-heading"><span class="section-label">Track Your Request</span><h2 class="section-title">See your request status</h2><p class="section-sub">Enter the requester name used in your request.</p></div><div class="donor-search-card"><div class="form-group" style="margin:0;flex:1"><label class="form-label" for="receiverSearchName">Requester Name</label><input id="receiverSearchName" class="form-input" placeholder="Enter your name"></div><button type="button" id="receiver-search-btn" class="btn btn-primary">Track My Requests</button></div><div id="receiverDashboardContainer" class="donor-dashboard-list"><div class="empty-state"><h3>No request selected</h3><p>Submit a request, then search your name here to track it.</p></div></div></div>
+</div></section></div>
+<footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-brand"><a href="index.html" class="nav-logo">Food<span style="color:var(--accent)">Connect</span></a><p>Connecting surplus food with people and organizations that need it.</p></div><div class="footer-col"><h4>Platform</h4><a href="index.html">Home</a><a href="donate.html">Donate Food</a><a href="request.html">Request Food</a><a href="leaderboard.html">Leaderboard</a></div><div class="footer-col"><h4>Organizations</h4><a href="organizations.html">Find Organizations</a><a href="organizations.html#register">Register Org</a></div><div class="footer-col"><h4>Admin</h4><a href="login.html">Admin Login</a><a href="about.html">About</a></div></div><div class="footer-bottom"><span>&copy; 2026 FoodConnect. All rights reserved.</span></div></div></footer>
+<script src="js/storage.js?v=3"></script><script src="js/ui.js"></script>
+<script>
+const REQUEST_FLOW=['Request Received','Accepted','Food Packing','Out for Delivery','Delivered'];
+const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function loadAvailableFoods(search='') {
+  const query = String(search || '').trim().toLowerCase();
+  const foods = getFoods().filter(f => {
+    const remaining = Number(f.remainingQuantity ?? f.quantity ?? 0);
+    const matchesSearch = !query ||
+      String(f.foodName || '').toLowerCase().includes(query) ||
+      String(f.foodType || '').toLowerCase().includes(query) ||
+      String(f.donorName || '').toLowerCase().includes(query);
+    return remaining > 0 && matchesSearch;
+  });
+  const box = document.getElementById('available-foods');
+  if (!foods.length) {
+    box.innerHTML='<div class="empty-state" style="grid-column:1/-1"><h3>No food currently available</h3><p>Try another search or check again later.</p></div>';
+    return;
+  }
+  box.innerHTML = foods.map(f => {
+    const id = String(f.id);
+    return `<div class="available-food-card">
+      <div class="food-card-top"><span class="food-type-badge">${esc(f.foodType||'Food')}</span><span class="available-count">${Number(f.remainingQuantity)} available</span></div>
+      <h3>${esc(f.foodName||'Community Meal')}</h3>
+      <div class="food-card-details">
+        <p><strong>Donor:</strong> ${esc(f.donorName||'Anonymous Donor')}</p>
+        <p><strong>Location:</strong> ${esc(f.location||'Not specified')}</p>
+        <p><strong>Contact:</strong> ${esc(f.donorContact||'Not provided')}</p>
+        <p><strong>Total donated:</strong> ${Number(f.quantity||0)}</p>
+      </div>
+      <button type="button" class="btn btn-primary request-food-btn" data-food-id="${esc(id)}" style="width:100%;margin-top:14px">Request This Food</button>
+    </div>`;
+  }).join('');
+}
+
+function selectFood(id) {
+  const food = getFoodById(String(id));
+  if (!food || Number(food.remainingQuantity ?? food.quantity ?? 0) <= 0) {
+    showToast('This food is no longer available.','error');
+    loadAvailableFoods(document.getElementById('food-search').value);
+    return;
+  }
+  document.getElementById('selectedFoodId').value = String(food.id);
+  document.getElementById('selected-food-title').textContent = `Request: ${food.foodName || 'Community Meal'}`;
+  document.getElementById('selected-food-summary').textContent = `${food.foodType||'Food'} · Donated by ${food.donorName||'Anonymous Donor'} · ${food.remainingQuantity} portions available at ${food.location||'the listed location'}.`;
+  document.getElementById('available-quantity-hint').textContent = `Maximum available: ${food.remainingQuantity} portions.`;
+  const qty=document.getElementById('reqPortions');
+  qty.max=Number(food.remainingQuantity);
+  qty.value='';
+  loadApprovedOrgs();
+  document.getElementById('request-form-section').classList.remove('hidden');
+  document.getElementById('request-form-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function loadApprovedOrgs(){const select=document.getElementById('reqTrust');const trusts=getApprovedTrusts();select.innerHTML='<option value="">Select a verified organization</option>';if(!trusts.length){const o=document.createElement('option');o.disabled=true;o.textContent='No verified organizations available';select.appendChild(o);return;}trusts.forEach(t=>{const o=document.createElement('option');o.value=t.id;o.textContent=`${t.name} — ${t.type||t.orgType} (${t.area||'Madurai'})`;o.dataset.name=t.name;o.dataset.type=t.type||t.orgType;o.dataset.area=t.area||'';select.appendChild(o);});}
+function renderReceiverTracking(){const name=document.getElementById('receiverSearchName').value.trim().toLowerCase();const box=document.getElementById('receiverDashboardContainer');if(!name){box.innerHTML='<div class="empty-state"><h3>Enter your name</h3><p>Use the same name you entered in the food request.</p></div>';return;}const matches=[];getFoods().forEach(food=>(food.requests||[]).forEach(r=>{if((r.name||r.requesterName||'').trim().toLowerCase()===name)matches.push({food,r});}));if(!matches.length){box.innerHTML='<div class="empty-state"><h3>No requests found</h3><p>Check the requester name and try again.</p></div>';return;}box.innerHTML=matches.map(({food,r})=>{const st=r.status||'Request Received';const idx=Math.max(0,REQUEST_FLOW.indexOf(st));return `<div class="dashboard-card"><div class="request-top"><div><h2>${esc(food.foodName)}</h2><p>${esc(food.foodType||'Food')} · ${r.people||r.portions} portions requested · Donor: ${esc(food.donorName)}</p></div><span class="badge ${st==='Rejected'?'badge-red':idx>=1?'badge-green':'badge-amber'}">${esc(st)}</span></div><p><strong>Pickup:</strong> ${esc(food.location)}</p><p><strong>Your location:</strong> ${esc(r.location)}</p><div class="status-container"><div class="status-title">Delivery Tracking</div><div class="fc-status-track">${REQUEST_FLOW.map((s,i)=>`<div class="fc-status-step ${i<=idx?'done':''}"><div class="fc-status-dot">${i<=idx?'✓':''}</div><span>${s}</span></div>`).join('')}</div></div></div>`;}).join('');}
+async function submitRequest(){const food=getFoodById(String(document.getElementById('selectedFoodId').value));if(!food){showToast('Please select a food first.','error');return;}const name=document.getElementById('reqName').value.trim(),code=document.getElementById('reqCountryCode').value,phone=document.getElementById('reqPhone').value.trim(),location=document.getElementById('reqLocation').value.trim(),portions=Number(document.getElementById('reqPortions').value),trustId=document.getElementById('reqTrust').value;let valid=true;if(!name){showFieldError('reqName','Please enter your name.');valid=false}else clearFieldError('reqName');if(!phone||!validatePhone(phone,code)){showFieldError('reqPhone','Please enter a valid 10 digit mobile number.');valid=false}else clearFieldError('reqPhone');if(!location){showFieldError('reqLocation','Please enter your location.');valid=false}else clearFieldError('reqLocation');if(!portions||portions<1||portions>Number(food.remainingQuantity)){showFieldError('reqPortions',`Enter a quantity between 1 and ${food.remainingQuantity}.`);valid=false}else clearFieldError('reqPortions');if(!trustId){showFieldError('reqTrust','Please select a verified organization.');valid=false}else clearFieldError('reqTrust');if(!valid){showToast('Please complete all required fields.','warn');return;}const trust=getTrustById(trustId);if(!trust||trust.status!=='Approved'){showToast('Selected organization is not verified.','error');return;}food.requests=Array.isArray(food.requests)?food.requests:[];const request={id:Date.now(),name,requesterName:name,contact:`${code} ${phone}`,location,people:portions,portions,trustId:trust.id,trustName:trust.name,trustType:trust.type||trust.orgType,status:'Request Received',submittedAt:now()};food.requests.push(request);food.remainingQuantity=Number(food.remainingQuantity)-portions;updateFood(food);addRequest({id:'REQ-'+request.id,requesterName:name,contact:request.contact,location,portions,foodId:food.id,foodName:food.foodName,foodType:food.foodType,donorName:food.donorName,trustId:trust.id,trustName:trust.name,status:'Pending',linkedRequestId:request.id,submittedAt:request.submittedAt});document.getElementById('request-message').textContent=`Request sent to ${food.donorName}. The donor will accept or reject it.`;showToast('Food request sent to the donor.','success');document.getElementById('requestForm').reset();document.getElementById('selectedFoodId').value=food.id;loadAvailableFoods();renderReceiverTracking();}
+document.addEventListener('DOMContentLoaded',()=>{
+  buildPhoneSelect('reqCountryCode','reqPhone');
+  const ph=document.getElementById('reqPhone');
+  ph.maxLength=10;
+  ph.addEventListener('input',()=>ph.value=ph.value.replace(/\D/g,'').slice(0,10));
+  document.getElementById('food-search').addEventListener('input',e=>loadAvailableFoods(e.target.value));
+  document.getElementById('available-foods').addEventListener('click',e=>{
+    const btn=e.target.closest('.request-food-btn');
+    if(btn) selectFood(btn.dataset.foodId);
+  });
+  document.getElementById('request-submit-btn').addEventListener('click',submitRequest);
+  document.getElementById('cancel-request-btn').addEventListener('click',()=>document.getElementById('request-form-section').classList.add('hidden'));
+  document.getElementById('receiver-search-btn').addEventListener('click',renderReceiverTracking);
+  document.getElementById('receiverSearchName').addEventListener('keydown',e=>{if(e.key==='Enter')renderReceiverTracking()});
+  loadAvailableFoods();
+});
+</script></body></html>

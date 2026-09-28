@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate Food — FoodConnect</title>
+  <meta name="description" content="Have extra food? Share it with someone in Madurai who needs it. Fill out a quick form and we'll connect your food to the right people.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <a href="index.html" class="nav-logo">Food<span>Connect</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donate.html" class="active">Donate</a>
+    <a href="request.html">Request Food</a>
+    <a href="organizations.html">Organizations</a>
+    <a href="fund-support.html">Support</a>
+    <a href="leaderboard.html">Leaderboard</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+  </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="donate.html">Donate Food</a>
+  <a href="request.html">Request Food</a>
+  <a href="organizations.html">Organizations</a>
+  <a href="fund-support.html">Support the Mission</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="login.html">Login</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label page-hero-tag">For Donors</span>
+      <h1 class="page-hero-title">Have food to share?</h1>
+      <p class="page-hero-sub">
+        Tell us what food you have, how many portions are available, and where it can be collected.
+        People who need food can see the exact food before requesting it.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <div class="donate-layout">
+
+        <!-- === FORM COLUMN === -->
+        <div class="donate-form-block">
+          <div class="form-card">
+
+            <!-- Form (shown by default) -->
+            <div id="donate-form-container">
+              <div class="form-card-header">
+                <div class="who-badge">This form is for Donors</div>
+                <h2 style="font-size:1.25rem; font-weight:800; color:var(--dark); margin-bottom:6px;">Share your surplus food</h2>
+                <p style="font-size:0.875rem; color:var(--mid-grey);">
+                  No unnecessary details needed. Just the basics so we can connect your food to the right people.
+                </p>
+              </div>
+
+              <form id="donateForm" class="form-card-body" novalidate>
+
+                <!-- Name -->
+                <div class="form-group">
+                  <label class="form-label" for="donorName">
+                    Your Name <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="donorName"
+                    class="form-input"
+                    placeholder="e.g., Harini Suresh"
+                    autocomplete="name"
+                    required
+                  >
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                  <label class="form-label" for="donorPhone">
+                    Mobile Number <span>*</span>
+                  </label>
+                  <p class="form-hint" style="margin-bottom:6px;">We may contact you to coordinate pickup.</p>
+                  <div class="phone-group">
+                    <select class="form-select" id="donorCountryCode" aria-label="Country code"></select>
+                    <input
+                      type="tel"
+                      id="donorPhone"
+                      class="form-input"
+                      placeholder="10-digit number"
+                      autocomplete="tel-national"
+                      required
+                    >
+                  </div>
+                </div>
+
+                <!-- Food name/type -->
+                <div class="form-group">
+                  <label class="form-label" for="donorFoodName">Food Name <span>*</span></label>
+                  <p class="form-hint" style="margin-bottom:6px;">Tell people exactly what food you are donating.</p>
+                  <input type="text" id="donorFoodName" class="form-input" placeholder="e.g., Veg Meals, Lemon Rice, Biryani" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="donorFoodType">Food Type <span>*</span></label>
+                  <select id="donorFoodType" class="form-select" required>
+                    <option value="">Select food type</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Non-Vegetarian">Non-Vegetarian</option>
+                    <option value="Egg">Egg</option>
+                    <option value="Snacks">Snacks</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Food count -->
+                <div class="form-group">
+                  <label class="form-label" for="donorFoodCount">
+                    Food Available For (people) <span>*</span>
+                  </label>
+                  <p class="form-hint" style="margin-bottom:6px;">How many people can this food serve?</p>
+                  <input
+                    type="number"
+                    id="donorFoodCount"
+                    class="form-input"
+                    placeholder="e.g., 20"
+                    min="1"
+                    max="500"
+                    required
+                  >
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                  <label class="form-label" for="donorLocation">
+                    Pickup Location <span>*</span>
+                  </label>
+                  <p class="form-hint" style="margin-bottom:6px;">Where is the food available for collection?</p>
+                  <input
+                    type="text"
+                    id="donorLocation"
+                    class="form-input"
+                    placeholder="e.g., Anna Nagar, Madurai"
+                    autocomplete="street-address"
+                    required
+                  >
+                </div>
+
+              </form>
+
+              <div class="form-card-footer">
+                <button type="button" id="donate-submit-btn" class="btn btn-primary submit-btn-full btn-lg">
+                  Donate Food
+                </button>
+                <p style="font-size:0.8rem; color:var(--mid-grey); margin-top:12px; text-align:center;">
+                  By submitting, you confirm the food is safe and fit for consumption.
+                </p>
+              </div>
+            </div>
+
+            <!-- Success State -->
+            <div class="success-state" id="donate-success">
+              <div class="success-icon">
+                <span class="material-symbols-outlined" style="color:var(--green)">check_circle</span>
+              </div>
+              <h3>Thank you for helping someone eat today.</h3>
+              <p>Your donation has been recorded. A verified organization will coordinate pickup from your location.</p>
+              <div class="ref-id" id="donate-ref-id"></div>
+              <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; justify-content:center;">
+                <a href="leaderboard.html" class="btn btn-ghost btn-sm">View Leaderboard</a>
+                <button class="btn btn-outline btn-sm" onclick="resetDonateForm()">Donate Again</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- === SIDEBAR === -->
+        <div class="donate-info-sidebar">
+
+          <div class="info-card">
+            <h3>What happens after you donate?</h3>
+            <div class="info-steps">
+              <div class="info-step">
+                <div class="info-step-num">1</div>
+                <div class="info-step-text">Your donation appears on the platform for verified organizations to see.</div>
+              </div>
+              <div class="info-step">
+                <div class="info-step-num">2</div>
+                <div class="info-step-text">A food requester submits a request through a verified partner organization.</div>
+              </div>
+              <div class="info-step">
+                <div class="info-step-num">3</div>
+                <div class="info-step-text">The organization coordinates collection from your location.</div>
+              </div>
+              <div class="info-step">
+                <div class="info-step-num">4</div>
+                <div class="info-step-text">Your contribution earns community points on the leaderboard.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="background:var(--green-light); border-color:var(--green);">
+            <h3 style="color:var(--green);">Points &amp; Recognition</h3>
+            <p style="font-size:0.875rem; color:var(--charcoal); line-height:1.6;">
+              Every meal you donate earns <strong>10 community points</strong>.
+              Top contributors appear on the public leaderboard.
+            </p>
+            <div style="margin-top:14px; padding:12px; background:rgba(255,255,255,0.6); border-radius:var(--radius-md); font-size:0.875rem; color:var(--green); font-weight:700;">
+              Food for 20 people = 200 points
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Need to request food instead?</h3>
+            <p style="font-size:0.875rem; color:var(--mid-grey); margin-bottom:14px;">
+              This form is for food donors only. If you or your community needs food, go to the Request page.
+            </p>
+            <a href="request.html" class="btn btn-outline" style="width:100%;">Request Food</a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Donor Request Management -->
+<section class="section donor-management-section">
+  <div class="container">
+    <div class="section-heading" style="text-align:center; margin-bottom:28px;">
+      <span class="section-label">For Donors</span>
+      <h2 class="section-title">Manage requests for your donations</h2>
+      <p class="section-sub">Enter the donor name used while donating to see requests and update delivery status.</p>
+    </div>
+    <div class="donor-search-card">
+      <div class="form-group" style="margin:0; flex:1;">
+        <label class="form-label" for="donorSearchName">Donor Name</label>
+        <input id="donorSearchName" class="form-input" placeholder="Enter your donor name">
+      </div>
+      <button type="button" id="donor-search-btn" class="btn btn-primary">View My Requests</button>
+    </div>
+    <div id="donorDashboardContainer" class="donor-dashboard-list">
+      <div class="empty-state"><h3>Donor requests will appear here</h3><p>Search using the same name used for your donation.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Food<span style="color:var(--accent)">Connect</span></a>
+        <p>Connecting surplus food with people and organizations that need it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="donate.html">Donate Food</a>
+        <a href="request.html">Request Food</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Organizations</h4>
+        <a href="organizations.html">Find Organizations</a>
+        <a href="organizations.html#register">Register Org</a>
+        <a href="fund-support.html">Support Mission</a>
+      </div>
+      <div class="footer-col">
+        <h4>Admin</h4>
+        <a href="login.html">Admin Login</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 FoodConnect. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/ui.js"></script>
+<script>
+const DONATION_STATUSES = ['Request Received','Request Accepted','Food Packing','Out for Delivery','Delivered'];
+
+function refreshFoodData() { return getFoods(); }
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+
+function handleDonateSubmit() {
+  const name = document.getElementById('donorName').value.trim();
+  const countryCode = document.getElementById('donorCountryCode').value;
+  const phone = document.getElementById('donorPhone').value.trim();
+  const foodName = document.getElementById('donorFoodName').value.trim();
+  const foodType = document.getElementById('donorFoodType').value;
+  const count = parseInt(document.getElementById('donorFoodCount').value, 10);
+  const location = document.getElementById('donorLocation').value.trim();
+  let valid = true;
+  if (!name) { showFieldError('donorName','Please enter your full name.'); valid=false; } else clearFieldError('donorName');
+  if (!phone || !validatePhone(phone,countryCode)) { showFieldError('donorPhone','Please enter a valid 10 digit mobile number.'); valid=false; } else clearFieldError('donorPhone');
+  if (!foodName) { showFieldError('donorFoodName','Please enter the food name.'); valid=false; } else clearFieldError('donorFoodName');
+  if (!foodType) { showFieldError('donorFoodType','Please select the food type.'); valid=false; } else clearFieldError('donorFoodType');
+  if (!count || count < 1) { showFieldError('donorFoodCount','Please enter a valid number of portions.'); valid=false; } else clearFieldError('donorFoodCount');
+  if (!location) { showFieldError('donorLocation','Please enter a pickup location.'); valid=false; } else clearFieldError('donorLocation');
+  if (!valid) { showToast('Please complete all required fields.','warn'); return; }
+
+  const food = {
+    id: Date.now(), donorName: name, foodName, foodType, quantity: count,
+    remainingQuantity: count, location, donorContact: `${countryCode} ${phone}`,
+    requests: [], submittedAt: now(), isDemo: false
+  };
+  addFood(food);
+  showToast('Food donation submitted successfully.','success');
+  document.getElementById('donate-form-container').style.display='none';
+  document.getElementById('donate-success').classList.add('active');
+  document.getElementById('donate-ref-id').textContent=`Donation ID: DON-${food.id}`;
+  document.getElementById('donate-success').querySelector('p').textContent = `${food.foodName} (${food.foodType}) for ${food.quantity} people has been added to available food.`;
+}
+
+function resetDonateForm() {
+  document.getElementById('donateForm').reset();
+  document.getElementById('donate-form-container').style.display='';
+  document.getElementById('donate-success').classList.remove('active');
+  clearAllErrors(document.getElementById('donateForm'));
+}
+
+function statusIndex(status) {
+  if (typeof status === 'number') return status;
+  return Math.max(0, DONATION_STATUSES.indexOf(status));
+}
+
+function renderStatus(current) {
+  const idx = statusIndex(current);
+  return `<div class="fc-status-track">${DONATION_STATUSES.map((s,i)=>`<div class="fc-status-step ${i<=idx?'done':''}"><div class="fc-status-dot">${i<=idx?'✓':''}</div><span>${s}</span></div>`).join('')}</div>`;
+}
+
+function updateDonorRequest(foodId, requestId, action) {
+  const foods = getFoods();
+  const food = foods.find(f => String(f.id) === String(foodId));
+  if (!food) return;
+  const request = (food.requests || []).find(r => String(r.id) === String(requestId));
+  if (!request) return;
+
+  if (action === 'reject') {
+    if (request.status !== 'Rejected' && request.status !== 'Delivered') {
+      food.remainingQuantity = Number(food.remainingQuantity || 0) + Number(request.people || request.portions || 0);
+    }
+    request.status = 'Rejected';
+    request.rejectedAt = now();
+  } else if (action === 'accept') {
+    request.status = 'Accepted';
+    request.acceptedAt = now();
+  } else if (action === 'next') {
+    const idx = statusIndex(request.status);
+    if (idx < DONATION_STATUSES.length - 1) request.status = DONATION_STATUSES[idx + 1];
+  }
+  saveFoods(foods);
+  showToast(action==='reject'?'Request rejected.':action==='accept'?'Request accepted.':'Delivery status updated.','success');
+  renderDonorDashboard();
+}
+
+function renderDonorDashboard() {
+  const name = document.getElementById('donorSearchName').value.trim().toLowerCase();
+  const container = document.getElementById('donorDashboardContainer');
+  if (!name) { container.innerHTML='<div class="empty-state"><h3>Enter your donor name</h3><p>Use the same name you entered while donating.</p></div>'; return; }
+  const foods = refreshFoodData().filter(f => (f.donorName||'').trim().toLowerCase()===name);
+  if (!foods.length) { container.innerHTML='<div class="empty-state"><h3>No donations found</h3><p>Check the donor name and try again.</p></div>'; return; }
+  container.innerHTML = foods.map(food => {
+    const requests = (food.requests||[]);
+    return `<div class="dashboard-card donor-request-card">
+      <div class="donor-card-heading"><div><h2>${escapeHtml(food.foodName || 'Food Donation')}</h2><p><strong>${escapeHtml(food.foodType||'Food')}</strong> · ${food.remainingQuantity} of ${food.quantity} portions available</p></div><span class="badge badge-green">${food.remainingQuantity>0?'Available':'Fully Requested'}</span></div>
+      <div class="food-meta-grid"><div><strong>Donor</strong><span>${escapeHtml(food.donorName)}</span></div><div><strong>Location</strong><span>${escapeHtml(food.location)}</span></div><div><strong>Contact</strong><span>${escapeHtml(food.donorContact)}</span></div></div>
+      ${requests.length ? requests.map(r=>{
+        const qty = r.people || r.portions || 0;
+        const st = r.status || 'Request Received';
+        const idx=statusIndex(st);
+        const action = st==='Request Received' || st==='Pending' ? `<button class="btn btn-primary btn-sm" onclick="updateDonorRequest('${food.id}','${r.id}','accept')">Accept Request</button><button class="btn btn-danger btn-sm" onclick="updateDonorRequest('${food.id}','${r.id}','reject')">Reject</button>` : st==='Rejected' || st==='Delivered' ? '' : `<button class="btn btn-outline btn-sm" onclick="updateDonorRequest('${food.id}','${r.id}','next')">${DONATION_STATUSES[idx+1] || 'Update'}</button>`;
+        return `<div class="donor-request-item"><div class="request-top"><div><h3>${escapeHtml(r.name || r.requesterName)}</h3><p>Requested <strong>${qty}</strong> portions of ${escapeHtml(food.foodName)}</p></div><span class="badge ${st==='Rejected'?'badge-red':idx>=1?'badge-green':'badge-amber'}">${escapeHtml(st)}</span></div><div class="request-meta"><span>📍 ${escapeHtml(r.location)}</span><span>📞 ${escapeHtml(r.contact)}</span>${r.trustName?`<span>✓ ${escapeHtml(r.trustName)}</span>`:''}</div>${renderStatus(st)}<div class="request-actions">${action}</div></div>`;
+      }).join('') : '<div class="empty-inline">No requests yet for this donation.</div>'}
+    </div>`;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  buildPhoneSelect('donorCountryCode','donorPhone');
+  const phone=document.getElementById('donorPhone'); if(phone){phone.maxLength=10; phone.addEventListener('input',()=>phone.value=phone.value.replace(/\D/g,'').slice(0,10));}
+  document.getElementById('donate-submit-btn').addEventListener('click',handleDonateSubmit);
+  document.getElementById('donateForm').addEventListener('submit',e=>{e.preventDefault();handleDonateSubmit();});
+  document.getElementById('donor-search-btn').addEventListener('click',renderDonorDashboard);
+  document.getElementById('donorSearchName').addEventListener('keydown',e=>{if(e.key==='Enter')renderDonorDashboard();});
+});
+</script>
+
+</body>
+</html>

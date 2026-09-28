@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support the Mission — FoodConnect</title>
+  <meta name="description" content="Financially support FoodConnect's mission to reduce food waste and feed communities in Madurai. Every contribution helps.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <a href="index.html" class="nav-logo">Food<span>Connect</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donate.html">Donate</a>
+    <a href="request.html">Request Food</a>
+    <a href="organizations.html">Organizations</a>
+    <a href="fund-support.html" class="active">Support</a>
+    <a href="leaderboard.html">Leaderboard</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+  </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="donate.html">Donate Food</a>
+  <a href="request.html">Request Food</a>
+  <a href="organizations.html">Organizations</a>
+  <a href="fund-support.html">Support the Mission</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="login.html">Login</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- Page Hero -->
+  <div class="page-hero dark">
+    <div class="container">
+      <span class="section-label page-hero-tag" style="background:rgba(163,255,79,0.15); color:var(--accent);">Financial Support</span>
+      <h1 class="page-hero-title">Support the mission</h1>
+      <p class="page-hero-sub">
+        Small contributions help cover food distribution costs, transportation,
+        and community food drives across Madurai.
+        Your support keeps the platform running.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <div class="fund-layout">
+
+        <!-- FORM -->
+        <div>
+          <div class="form-card" id="fund-form-card">
+
+            <div id="fund-form-container">
+              <div class="form-card-header">
+                <div class="who-badge">For Supporters</div>
+                <h2 style="font-size:1.25rem; font-weight:800; color:var(--dark); margin-bottom:6px;">Make a contribution</h2>
+                <p style="font-size:0.875rem; color:var(--mid-grey);">
+                  This is a demo payment experience. No real transaction will occur.
+                  The system is designed for real payment gateway integration.
+                </p>
+              </div>
+
+              <div class="form-card-body" id="fund-step-1">
+
+                <!-- Amount -->
+                <div>
+                  <label class="form-label" style="margin-bottom:12px; display:block;">Choose an amount</label>
+                  <div class="amount-grid">
+                    <button class="amount-btn" type="button" onclick="selectAmount(100)">Rs. 100</button>
+                    <button class="amount-btn" type="button" onclick="selectAmount(250)">Rs. 250</button>
+                    <button class="amount-btn" type="button" onclick="selectAmount(500)">Rs. 500</button>
+                    <button class="amount-btn" type="button" onclick="selectAmount(1000)">Rs. 1,000</button>
+                    <button class="amount-btn" type="button" onclick="selectAmount(2500)">Rs. 2,500</button>
+                    <button class="amount-btn" type="button" onclick="selectAmount(5000)">Rs. 5,000</button>
+                  </div>
+                  <div class="custom-amount-row">
+                    <span class="currency-symbol">Rs.</span>
+                    <input
+                      type="number"
+                      id="customAmount"
+                      class="form-input"
+                      placeholder="Or enter a custom amount"
+                      min="10"
+                      oninput="clearAmountBtns()"
+                    >
+                  </div>
+                </div>
+
+                <!-- Purpose -->
+                <div class="form-group">
+                  <label class="form-label" for="fundPurpose">Purpose <span>*</span></label>
+                  <select id="fundPurpose" class="form-select">
+                    <option value="General Food Support">General Food Support</option>
+                    <option value="Meal Distribution">Meal Distribution</option>
+                    <option value="Emergency Support">Emergency Support</option>
+                    <option value="Community Food Drive">Community Food Drive</option>
+                    <option value="Platform Operations">Platform Operations</option>
+                  </select>
+                </div>
+
+                <!-- Donor Name -->
+                <div class="form-group">
+                  <label class="form-label" for="fundName">Your Name <span>*</span></label>
+                  <input type="text" id="fundName" class="form-input" placeholder="e.g., Arun Kumar" required>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                  <label class="form-label" for="fundEmail">Email Address <span>*</span></label>
+                  <p class="form-hint" style="margin-bottom:6px;">We will send a contribution confirmation to this email.</p>
+                  <input type="email" id="fundEmail" class="form-input" placeholder="your@email.com" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                  <label class="form-label" for="fundPhone">Mobile Number <span>*</span></label>
+                  <div class="phone-group">
+                    <select class="form-select" id="fundCountryCode" aria-label="Country code"></select>
+                    <input type="tel" id="fundPhone" class="form-input" placeholder="10-digit number" required>
+                  </div>
+                </div>
+
+                <!-- Anonymous -->
+                <div style="display:flex; align-items:center; gap:10px; padding:12px; background:var(--off-white); border-radius:var(--radius-md);">
+                  <input type="checkbox" id="fundAnonymous" style="width:16px; height:16px; cursor:pointer; accent-color:var(--green);">
+                  <label for="fundAnonymous" style="font-size:0.875rem; font-weight:600; color:var(--charcoal); cursor:pointer;">
+                    Make this contribution anonymous
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="form-card-footer" id="fund-step-1-footer">
+                <button type="button" class="btn btn-primary submit-btn-full btn-lg" onclick="proceedToPayment()">
+                  Continue to Support
+                </button>
+              </div>
+
+              <!-- PAYMENT MOCK (Step 2) -->
+              <div class="payment-mock" id="fund-payment-mock">
+                <div class="payment-mock-header">
+                  <strong style="font-size:1rem; color:var(--dark);">Payment Summary</strong>
+                  <span class="demo-badge">Demo Mode</span>
+                </div>
+                <div class="payment-summary-row">
+                  <span>Contributor</span>
+                  <span id="pay-name">-</span>
+                </div>
+                <div class="payment-summary-row">
+                  <span>Purpose</span>
+                  <span id="pay-purpose">-</span>
+                </div>
+                <div class="payment-summary-row">
+                  <span>Amount</span>
+                  <span id="pay-amount">-</span>
+                </div>
+                <div class="payment-summary-row total">
+                  <span>Total</span>
+                  <span id="pay-total">-</span>
+                </div>
+                <div class="payment-disclaimer">
+                  This is a demo payment screen. No real financial transaction will be processed.
+                  In production, this would integrate with Razorpay or Stripe.
+                  Never enter real payment credentials here.
+                </div>
+                <div style="display:flex; gap:10px; margin-top:20px;">
+                  <button type="button" class="btn btn-ghost" onclick="cancelPayment()">Go Back</button>
+                  <button type="button" class="btn btn-primary" style="flex:1;" onclick="confirmPayment()">
+                    Confirm Contribution (Demo)
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Success State -->
+            <div class="success-state" id="fund-success">
+              <div class="success-icon">
+                <span class="material-symbols-outlined" style="color:var(--green)">favorite</span>
+              </div>
+              <h3>Thank you for your support.</h3>
+              <p>Your contribution has been recorded. This is a demo confirmation — no real payment was processed.</p>
+              <div class="ref-id" id="fund-ref-id"></div>
+              <div style="padding:12px 16px; background:var(--amber-light); border-radius:var(--radius-md); font-size:0.8rem; color:var(--amber); font-weight:600; text-align:center; max-width:320px;">
+                Demo Mode: This transaction was simulated only.
+                No real funds were transferred.
+              </div>
+              <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap; justify-content:center;">
+                <a href="index.html" class="btn btn-ghost btn-sm">Go Home</a>
+                <button class="btn btn-outline btn-sm" onclick="resetFundForm()">New Contribution</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="fund-sidebar">
+          <div class="info-card" style="margin-bottom:20px;">
+            <h3>Where your contribution goes</h3>
+            <div style="margin-top:16px;">
+              <div class="fund-use-item">
+                <div class="fund-use-icon">
+                  <span class="material-symbols-outlined">local_shipping</span>
+                </div>
+                <div class="fund-use-text">
+                  <h4>Food Transportation</h4>
+                  <p>Covers vehicle costs for collecting and delivering food donations across Madurai.</p>
+                </div>
+              </div>
+              <div class="fund-use-item">
+                <div class="fund-use-icon">
+                  <span class="material-symbols-outlined">volunteer_activism</span>
+                </div>
+                <div class="fund-use-text">
+                  <h4>Community Food Drives</h4>
+                  <p>Organizing neighbourhood food collection events and community kitchens.</p>
+                </div>
+              </div>
+              <div class="fund-use-item">
+                <div class="fund-use-icon">
+                  <span class="material-symbols-outlined">verified</span>
+                </div>
+                <div class="fund-use-text">
+                  <h4>Organization Verification</h4>
+                  <p>Admin costs for reviewing and verifying partner organizations.</p>
+                </div>
+              </div>
+              <div class="fund-use-item">
+                <div class="fund-use-icon">
+                  <span class="material-symbols-outlined">devices</span>
+                </div>
+                <div class="fund-use-text">
+                  <h4>Platform Operations</h4>
+                  <p>Keeping the FoodConnect platform running and accessible to everyone.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" style="background:var(--off-white);">
+            <h3>Have food to share instead?</h3>
+            <p style="font-size:0.875rem; color:var(--mid-grey); margin-bottom:14px; line-height:1.5;">
+              If you have surplus food rather than funds to contribute, you can donate food directly through the platform.
+            </p>
+            <a href="donate.html" class="btn btn-outline" style="width:100%;">Donate Food</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Food<span style="color:var(--accent)">Connect</span></a>
+        <p>Connecting surplus food with people and organizations that need it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="donate.html">Donate Food</a>
+        <a href="request.html">Request Food</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Organizations</h4>
+        <a href="organizations.html">Find Organizations</a>
+        <a href="fund-support.html">Support Mission</a>
+      </div>
+      <div class="footer-col">
+        <h4>Admin</h4>
+        <a href="login.html">Admin Login</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 FoodConnect. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/ui.js"></script>
+<script>
+let selectedAmount = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  buildPhoneSelect('fundCountryCode');
+});
+
+function selectAmount(amount) {
+  selectedAmount = amount;
+  document.getElementById('customAmount').value = '';
+  document.querySelectorAll('.amount-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.textContent.includes(amount.toLocaleString()));
+  });
+}
+
+function clearAmountBtns() {
+  document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+  selectedAmount = 0;
+}
+
+function getFinalAmount() {
+  const custom = parseFloat(document.getElementById('customAmount').value);
+  return custom > 0 ? custom : selectedAmount;
+}
+
+function proceedToPayment() {
+  const name        = document.getElementById('fundName').value.trim();
+  const email       = document.getElementById('fundEmail').value.trim();
+  const countryCode = document.getElementById('fundCountryCode').value;
+  const phone       = document.getElementById('fundPhone').value.trim();
+  const purpose     = document.getElementById('fundPurpose').value;
+  const amount      = getFinalAmount();
+
+  let valid = true;
+
+  if (!name) { showFieldError('fundName', 'Please enter your name.'); valid = false; }
+  else clearFieldError('fundName');
+
+  if (!email || !validateEmail(email)) { showFieldError('fundEmail', 'Please enter a valid email.'); valid = false; }
+  else clearFieldError('fundEmail');
+
+  if (!phone || !validatePhone(phone, countryCode)) {
+    showFieldError('fundPhone', 'Please enter a valid mobile number.');
+    valid = false;
+  } else clearFieldError('fundPhone');
+
+  if (!amount || amount < 10) {
+    showToast('Please select or enter a contribution amount (minimum Rs. 10).', 'warn');
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  /* Show payment summary */
+  const anonymous = document.getElementById('fundAnonymous').checked;
+
+  document.getElementById('pay-name').textContent    = anonymous ? 'Anonymous' : name;
+  document.getElementById('pay-purpose').textContent = purpose;
+  document.getElementById('pay-amount').textContent  = `Rs. ${amount.toLocaleString('en-IN')}`;
+  document.getElementById('pay-total').textContent   = `Rs. ${amount.toLocaleString('en-IN')}`;
+
+  document.getElementById('fund-step-1').style.display       = 'none';
+  document.getElementById('fund-step-1-footer').style.display = 'none';
+  document.getElementById('fund-payment-mock').classList.add('active');
+}
+
+function cancelPayment() {
+  document.getElementById('fund-step-1').style.display       = '';
+  document.getElementById('fund-step-1-footer').style.display = '';
+  document.getElementById('fund-payment-mock').classList.remove('active');
+}
+
+function confirmPayment() {
+  const name      = document.getElementById('fundName').value.trim();
+  const email     = document.getElementById('fundEmail').value.trim();
+  const countryCode = document.getElementById('fundCountryCode').value;
+  const phone     = document.getElementById('fundPhone').value.trim();
+  const purpose   = document.getElementById('fundPurpose').value;
+  const amount    = getFinalAmount();
+  const anonymous = document.getElementById('fundAnonymous').checked;
+
+  const fund = {
+    id:        generateId('FUND'),
+    name:      anonymous ? 'Anonymous' : name,
+    email,
+    contact:   `${countryCode} ${phone}`,
+    amount,
+    purpose,
+    anonymous,
+    status:    'Demo Confirmed',
+    submittedAt: now()
+  };
+
+  addFund(fund);
+  showToast('Contribution recorded (Demo Mode).', 'success');
+
+  /* Success state */
+  document.getElementById('fund-form-container').style.display = 'none';
+  document.getElementById('fund-success').classList.add('active');
+  document.getElementById('fund-ref-id').textContent = `Reference: ${fund.id}`;
+}
+
+function resetFundForm() {
+  document.getElementById('fundName').value    = '';
+  document.getElementById('fundEmail').value   = '';
+  document.getElementById('fundPhone').value   = '';
+  document.getElementById('customAmount').value = '';
+  document.getElementById('fundAnonymous').checked = false;
+  document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+  selectedAmount = 0;
+
+  document.getElementById('fund-step-1').style.display       = '';
+  document.getElementById('fund-step-1-footer').style.display = '';
+  document.getElementById('fund-payment-mock').classList.remove('active');
+  document.getElementById('fund-form-container').style.display = '';
+  document.getElementById('fund-success').classList.remove('active');
+}
+</script>
+
+</body>
+</html>

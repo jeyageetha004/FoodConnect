@@ -1,0 +1,1404 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background: white;
+
+    border-bottom: 1px solid #ddd;
+
+    z-index: 1000;
+}
+
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    color: #287c32;
+}
+
+
+nav {
+
+    display: flex;
+
+    gap: 20px;
+
+    align-items: center;
+}
+
+
+nav a {
+
+    text-decoration: none;
+
+    color: #333;
+
+    font-size: 14px;
+}
+
+
+nav a:hover {
+
+    color: #287c32;
+}
+
+
+/* =========================
+   COMMON
+========================= */
+
+.page {
+
+    min-height: 100vh;
+
+    padding-top: 70px;
+}
+
+
+.section-content {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+.home {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    min-height: 100vh;
+
+    background-image:
+        url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+.home-overlay {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, 0.58);
+}
+
+
+.home-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 850px;
+
+    padding: 30px;
+
+    color: white;
+}
+
+
+.home h1 {
+
+    font-size: 50px;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+}
+
+
+.home h2 {
+
+    color: #8fd694;
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+
+.home p {
+
+    font-size: 19px;
+
+    line-height: 1.7;
+
+    margin-bottom: 30px;
+}
+
+
+.home-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+
+.home-buttons a {
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+
+    border: none;
+
+    background: #287c32;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+
+button:hover {
+
+    background: #216528;
+}
+
+
+button:disabled {
+
+    background: #999;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.about h1 {
+
+    color: #287c32;
+
+    font-size: 40px;
+
+    margin-bottom: 20px;
+}
+
+
+.about > .section-content > p {
+
+    max-width: 750px;
+
+    margin: auto;
+
+    line-height: 1.7;
+
+    font-size: 18px;
+}
+
+
+.about-cards {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-top: 50px;
+}
+
+
+.about-card {
+
+    width: 280px;
+
+    padding: 30px;
+
+    background: #f7f7f7;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.about-card h2 {
+
+    color: #287c32;
+
+    margin-bottom: 15px;
+}
+
+
+.about-card p {
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.donate {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #f7f7f7;
+}
+
+
+.form-box {
+
+    width: 450px;
+
+    max-width: 90%;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.1);
+
+    margin: 40px auto;
+}
+
+
+.form-box h1 {
+
+    text-align: center;
+
+    color: #287c32;
+
+    margin-bottom: 10px;
+}
+
+
+.form-box > p {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+label {
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    margin-top: 5px;
+}
+
+
+input {
+
+    padding: 12px;
+
+    border: 1px solid #bbb;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+}
+
+
+input:focus {
+
+    outline: none;
+
+    border-color: #287c32;
+}
+
+
+form button {
+
+    margin-top: 15px;
+}
+
+
+.success-message {
+
+    color: #287c32;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+
+    color: red;
+
+    font-weight: bold;
+
+    margin-top: 5px;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+
+    text-align: left;
+}
+
+
+/* =========================
+   AVAILABLE FOOD
+========================= */
+
+.available {
+
+    padding-top: 120px;
+
+    padding-bottom: 80px;
+}
+
+
+.available h1 {
+
+    color: #287c32;
+
+    font-size: 38px;
+
+    margin-bottom: 10px;
+}
+
+
+.available > .section-content > p {
+
+    margin-bottom: 25px;
+}
+
+
+.search {
+
+    width: 300px;
+
+    margin-bottom: 40px;
+}
+
+
+.food-container {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 25px;
+}
+
+
+.food-card {
+
+    width: 260px;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.12);
+
+    text-align: left;
+}
+
+
+.food-card h3 {
+
+    color: #287c32;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+
+.food-card p {
+
+    margin: 8px 0;
+
+    font-size: 14px;
+}
+
+
+.food-card button {
+
+    width: 100%;
+
+    margin-top: 15px;
+}
+
+
+/* =========================
+   REQUEST
+========================= */
+
+.request-section {
+
+    background: #f7f7f7;
+
+    padding: 30px 0 70px;
+}
+
+
+.hidden {
+
+    display: none;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+
+    background: #ffffff;
+
+    padding-top: 120px;
+
+    padding-bottom: 100px;
+}
+
+
+.receiver-dashboard {
+
+    background: #f7f7f7;
+
+    padding-top: 120px;
+
+    padding-bottom: 100px;
+}
+
+
+.dashboard h1,
+.receiver-dashboard h1 {
+
+    color: #287c32;
+
+    font-size: 38px;
+
+    margin-bottom: 10px;
+}
+
+
+.dashboard-search {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin: 30px 0 40px;
+}
+
+
+.dashboard-search input {
+
+    width: 300px;
+}
+
+
+/* =========================
+   DASHBOARD CARD
+========================= */
+
+.dashboard-card {
+
+    max-width: 850px;
+
+    margin: 20px auto;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.1);
+
+    text-align: left;
+}
+
+
+.dashboard-card h2 {
+
+    color: #287c32;
+
+    margin-bottom: 15px;
+}
+
+
+.dashboard-card h3 {
+
+    color: #287c32;
+
+    margin-top: 20px;
+
+    margin-bottom: 15px;
+}
+
+
+.dashboard-card p {
+
+    margin: 8px 0;
+}
+
+
+.request-details {
+
+    margin-top: 20px;
+}
+
+
+/* =========================
+   DELIVERY TRACKING
+========================= */
+
+.status-container {
+
+    margin-top: 30px;
+
+    padding: 25px 10px 10px;
+
+    border-top: 1px solid #ddd;
+}
+
+
+.status-title {
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    margin-bottom: 30px;
+
+    color: #287c32;
+}
+
+
+.status-tracking {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    width: 100%;
+
+    padding: 0 10px;
+}
+
+
+.status-tracking::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 12px;
+
+    left: 30px;
+
+    right: 30px;
+
+    height: 4px;
+
+    background: #ddd;
+
+    z-index: 0;
+}
+
+
+.status-item {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    width: 20%;
+
+    z-index: 1;
+
+    text-align: center;
+}
+
+
+.status-circle {
+
+    width: 26px;
+
+    height: 26px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    border: 4px solid #ddd;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+.status-item.active .status-circle {
+
+    background: #287c32;
+
+    border-color: #287c32;
+
+    color: white;
+}
+
+
+.status-label {
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    color: #999;
+
+    line-height: 1.3;
+
+    max-width: 100px;
+}
+
+
+.status-item.active .status-label {
+
+    color: #287c32;
+}
+
+
+.status-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+.status-buttons button {
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    background: #287c32;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 22px;
+}
+
+
+/* ==================================================
+   TRUST / NGO
+================================================== */
+
+.trust-section {
+
+    background: #f7f7f7;
+
+    padding-top: 120px;
+
+    padding-bottom: 100px;
+}
+
+
+.trust-section h1 {
+
+    color: #287c32;
+
+    font-size: 38px;
+
+    margin-bottom: 15px;
+}
+
+
+.trust-intro {
+
+    max-width: 750px;
+
+    margin: 0 auto 40px;
+
+    line-height: 1.7;
+
+    font-size: 18px;
+}
+
+
+.sub-heading {
+
+    color: #287c32;
+
+    font-size: 28px;
+
+    margin: 40px 0 25px;
+}
+
+
+/* VERIFIED TRUST CARDS */
+
+.trust-container {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-bottom: 50px;
+}
+
+
+.trust-card {
+
+    width: 300px;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.12);
+
+    text-align: left;
+}
+
+
+.trust-card h3 {
+
+    color: #287c32;
+
+    text-align: center;
+
+    margin-bottom: 15px;
+}
+
+
+.trust-card p {
+
+    margin: 8px 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.trust-badge {
+
+    display: inline-block;
+
+    background: #287c32;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+}
+
+
+/* TRUST REGISTRATION */
+
+.trust-registration {
+
+    width: 500px;
+
+    max-width: 90%;
+
+    margin: 40px auto;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.1);
+
+    text-align: left;
+}
+
+
+.trust-registration h2 {
+
+    text-align: center;
+
+    color: #287c32;
+
+    margin-bottom: 10px;
+}
+
+
+.trust-registration > p {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    line-height: 1.5;
+}
+
+
+/* SELECT / TEXTAREA */
+
+select,
+textarea {
+
+    padding: 12px;
+
+    border: 1px solid #bbb;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+
+    font-family: Arial, sans-serif;
+}
+
+
+select:focus,
+textarea:focus {
+
+    outline: none;
+
+    border-color: #287c32;
+}
+
+
+textarea {
+
+    resize: vertical;
+}
+
+
+/* DOCUMENTS */
+
+.document-section {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background: #f7f7f7;
+
+    border-radius: 8px;
+
+    border: 1px solid #ddd;
+}
+
+
+.document-section h3 {
+
+    color: #287c32;
+
+    margin-bottom: 8px;
+}
+
+
+.document-section p {
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+
+    line-height: 1.5;
+}
+
+
+.document-section input[type="file"] {
+
+    width: 100%;
+
+    padding: 10px;
+
+    background: white;
+
+    border: 1px solid #bbb;
+
+    border-radius: 5px;
+}
+
+
+/* TRUST NOTE */
+
+.trust-note {
+
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.5;
+
+    margin-top: 5px;
+}
+
+
+/* ADMIN */
+
+.admin-panel {
+
+    max-width: 950px;
+
+    margin: 60px auto 0;
+
+    padding: 30px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.1);
+
+    text-align: left;
+}
+
+
+.admin-panel h2 {
+
+    text-align: center;
+
+    color: #287c32;
+
+    margin-bottom: 10px;
+}
+
+
+.admin-panel > p {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+/* ADMIN TRUST CARD */
+
+.admin-trust-card {
+
+    padding: 25px;
+
+    margin: 20px 0;
+
+    border: 1px solid #ddd;
+
+    border-radius: 8px;
+
+    background: #fafafa;
+}
+
+
+.admin-trust-card h3 {
+
+    color: #287c32;
+
+    margin-bottom: 15px;
+}
+
+
+.admin-trust-card p {
+
+    margin: 7px 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* TRUST STATUS */
+
+.trust-status {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin: 10px 0;
+}
+
+
+.trust-status.pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+}
+
+
+.trust-status.approved {
+
+    background: #d4edda;
+
+    color: #155724;
+}
+
+
+.trust-status.rejected {
+
+    background: #f8d7da;
+
+    color: #721c24;
+}
+
+
+/* ADMIN BUTTONS */
+
+.admin-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.admin-buttons button {
+
+    flex: 1;
+}
+
+
+.approve-btn {
+
+    background: #287c32;
+}
+
+
+.reject-btn {
+
+    background: #b52b27;
+}
+
+
+.reject-btn:hover {
+
+    background: #92211e;
+}
+
+
+/* TRUST DETAILS */
+
+.trust-details {
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    background: #f7f7f7;
+
+    border-radius: 6px;
+}
+
+
+.trust-details p {
+
+    margin: 6px 0;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+
+        height: auto;
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    nav {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+
+    .home h1 {
+
+        font-size: 35px;
+    }
+
+
+    .home h2 {
+
+        font-size: 26px;
+    }
+
+
+    .about-cards {
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .dashboard-search {
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .dashboard-search input {
+
+        width: 90%;
+    }
+
+
+    .status-container {
+
+        overflow-x: auto;
+    }
+
+
+    .status-tracking {
+
+        min-width: 650px;
+    }
+
+
+    .status-item {
+
+        min-width: 125px;
+    }
+
+
+    .status-buttons {
+
+        flex-direction: column;
+    }
+
+
+    .status-buttons button {
+
+        width: 100%;
+    }
+
+
+    .trust-registration {
+
+        width: 90%;
+    }
+
+
+    .trust-container {
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .trust-card {
+
+        width: 90%;
+    }
+
+
+    .admin-panel {
+
+        width: 90%;
+    }
+
+
+    .admin-buttons {
+
+        flex-direction: column;
+    }
+
+}
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-btn {
+    background: #287c32;
+    color: white !important;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    background: #1f6328;
+}

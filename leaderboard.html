@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard — FoodConnect</title>
+  <meta name="description" content="See the top food donors on FoodConnect. Every meal shared earns community points.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <a href="index.html" class="nav-logo">Food<span>Connect</span></a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donate.html">Donate</a>
+    <a href="request.html">Request Food</a>
+    <a href="organizations.html">Organizations</a>
+    <a href="fund-support.html">Support</a>
+    <a href="leaderboard.html" class="active">Leaderboard</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+  </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="donate.html">Donate Food</a>
+  <a href="request.html">Request Food</a>
+  <a href="organizations.html">Organizations</a>
+  <a href="fund-support.html">Support the Mission</a>
+  <a href="leaderboard.html">Leaderboard</a>
+  <a href="login.html">Login</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label page-hero-tag">Community Impact</span>
+      <h1 class="page-hero-title">Food Donor Leaderboard</h1>
+      <p class="page-hero-sub">
+        Every meal shared earns community points. Top contributors are recognized
+        for making a real difference in Madurai.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <section class="section">
+    <div class="container">
+      <div class="leaderboard-layout">
+
+        <!-- Table -->
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+            <h2 style="font-size:1.2rem; font-weight:800; color:var(--dark);">Top Contributors</h2>
+            <div class="sort-controls">
+              <button class="sort-btn active" id="sort-points" onclick="setSortMode('points')">By Points</button>
+              <button class="sort-btn" id="sort-people" onclick="setSortMode('people')">By People Helped</button>
+              <button class="sort-btn" id="sort-donations" onclick="setSortMode('donations')">By Donations</button>
+            </div>
+          </div>
+
+          <div class="admin-table-card">
+            <div class="lb-table-header">
+              <div style="text-align:center;">Rank</div>
+              <div>Donor</div>
+              <div>Donations</div>
+              <div>People Helped</div>
+              <div>Points</div>
+            </div>
+            <div id="lb-rows">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div>
+          <div class="lb-sidebar-card">
+            <h3>Points Formula</h3>
+            <div class="lb-formula">
+              <div class="formula-eq">1 person served = 10 pts</div>
+              <p>Food for 20 people = 200 points</p>
+            </div>
+            <p style="font-size:0.8125rem; color:var(--mid-grey); margin-top:14px; line-height:1.5;">
+              Every meal you share keeps good food out of the bin and puts it where it matters most.
+            </p>
+          </div>
+
+          <div class="lb-sidebar-card">
+            <h3>Platform Stats</h3>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.875rem; color:var(--mid-grey);">Total Donations</span>
+                <span style="font-weight:800; color:var(--dark);" id="lb-stat-donations">0</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:12px;">
+                <span style="font-size:0.875rem; color:var(--mid-grey);">Total Meals Shared</span>
+                <span style="font-weight:800; color:var(--green);" id="lb-stat-meals">0</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); padding-top:12px;">
+                <span style="font-size:0.875rem; color:var(--mid-grey);">Total Points Earned</span>
+                <span style="font-weight:800; color:var(--green);" id="lb-stat-points">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="lb-sidebar-card" style="background:var(--green); border-color:var(--green);">
+            <h3 style="color:var(--white);">Ready to make an impact?</h3>
+            <p style="font-size:0.875rem; color:rgba(255,255,255,0.8); margin-bottom:14px; line-height:1.5;">
+              Join the community and start earning points with your first food donation.
+            </p>
+            <a href="donate.html" class="btn btn-white" style="width:100%; text-align:center;">Donate Food Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">Food<span style="color:var(--accent)">Connect</span></a>
+        <p>Connecting surplus food with people and organizations that need it.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="index.html">Home</a>
+        <a href="donate.html">Donate Food</a>
+        <a href="request.html">Request Food</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </div>
+      <div class="footer-col">
+        <h4>Organizations</h4>
+        <a href="organizations.html">Find Organizations</a>
+        <a href="fund-support.html">Support Mission</a>
+      </div>
+      <div class="footer-col">
+        <h4>Admin</h4>
+        <a href="login.html">Admin Login</a>
+        <a href="about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 FoodConnect. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/storage.js"></script>
+<script src="js/ui.js"></script>
+<script>
+let sortMode = 'points';
+
+function setSortMode(mode) {
+  sortMode = mode;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sort-' + mode).classList.add('active');
+  renderLeaderboard();
+}
+
+function renderLeaderboard() {
+  const container = document.getElementById('lb-rows');
+  let leaders     = computeLeaderboard();
+
+  if (sortMode === 'people') {
+    leaders.sort((a, b) => b.people - a.people);
+  } else if (sortMode === 'donations') {
+    leaders.sort((a, b) => b.donations - a.donations);
+  }
+
+  if (!leaders.length) {
+    container.innerHTML = `<div class="empty-state" style="padding:60px 20px;">
+      <div class="empty-icon"><span class="material-symbols-outlined">emoji_events</span></div>
+      <h3>No contributors yet</h3>
+      <p>Be the first to donate food and claim the top spot.</p>
+      <a href="donate.html" class="btn btn-primary" style="margin-top:14px;">Donate Food</a>
+    </div>`;
+    return;
+  }
+
+  const rankLabel = (i) => {
+    if (i === 0) return '<span class="lb-rank gold">#1</span>';
+    if (i === 1) return '<span class="lb-rank silver">#2</span>';
+    if (i === 2) return '<span class="lb-rank bronze">#3</span>';
+    return `<span class="lb-rank">#${i+1}</span>`;
+  };
+
+  container.innerHTML = leaders.map((l, i) => `
+    <div class="lb-row ${i < 3 ? 'top-3' : ''}">
+      ${rankLabel(i)}
+      <div class="lb-donor">
+        <div class="lb-avatar">${l.name.charAt(0).toUpperCase()}</div>
+        <div>
+          <div class="lb-name">${l.name}</div>
+          ${l.location ? `<div class="lb-location">${l.location}</div>` : ''}
+        </div>
+      </div>
+      <div class="lb-cell">${l.donations}</div>
+      <div class="lb-cell">${l.people}</div>
+      <div class="lb-points">${l.points}</div>
+    </div>
+  `).join('');
+}
+
+function loadSidebarStats() {
+  const stats = getSiteStats();
+  document.getElementById('lb-stat-donations').textContent = stats.donations;
+  document.getElementById('lb-stat-meals').textContent     = stats.meals;
+  document.getElementById('lb-stat-points').textContent    = stats.meals * 10;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderLeaderboard();
+  loadSidebarStats();
+});
+</script>
+
+</body>
+</html>
